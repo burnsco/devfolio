@@ -17,7 +17,7 @@ export const projects = [
 		color: "#16a34a",
 		tech: "React · TypeScript · Vite · Express · Prisma · PostgreSQL · Stripe",
 		description:
-			"Earth-brutalist storefront with full checkout flow, admin dashboard, Stripe payments, and PostgreSQL persistence.",
+			"A full-stack e-commerce demo site with a raw brutalist aesthetic, featuring product management, cart flow, and Stripe payments.",
 		url: "https://earthco.coreyburns.ca",
 		repo: "https://github.com/corey-burns-dev/earthco-market",
 	},
