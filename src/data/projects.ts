@@ -12,6 +12,17 @@ export const projects = [
 	},
 	{
 		id: "02",
+		title: "earthco-market",
+		category: "E-commerce",
+		color: "#16a34a",
+		tech: "React · TypeScript · Vite · Express · Prisma · PostgreSQL · Stripe",
+		description:
+			"Earth-brutalist storefront with full checkout flow, admin dashboard, Stripe payments, and PostgreSQL persistence.",
+		url: "https://earthco.coreyburns.ca",
+		repo: "https://github.com/corey-burns-dev/earthco-market",
+	},
+	{
+		id: "03",
 		title: "hackernews",
 		category: "News Client",
 		color: "#fb923c",
@@ -22,7 +33,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/hackernews",
 	},
 	{
-		id: "03",
+		id: "04",
 		title: "dream-transmission",
 		category: "Ambient Experience",
 		color: "#a855f7",
@@ -33,7 +44,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/dream-transmission",
 	},
 	{
-		id: "04",
+		id: "05",
 		title: "wake-transmission",
 		category: "Audio-Reactive Visualizer",
 		color: "#06b6d4",
@@ -44,7 +55,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/wake-transmission",
 	},
 	{
-		id: "05",
+		id: "06",
 		title: "image-mage",
 		category: "Media Tooling",
 		color: "#f59e0b",
@@ -55,7 +66,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/image-mage",
 	},
 	{
-		id: "06",
+		id: "07",
 		title: "tools-hub",
 		category: "Developer Utilities",
 		color: "#22c55e",
@@ -66,7 +77,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/tools-hub",
 	},
 	{
-		id: "07",
+		id: "08",
 		title: "games-hub",
 		category: "Arcade Platform",
 		color: "#ef4444",
@@ -77,7 +88,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/games-hub",
 	},
 	{
-		id: "08",
+		id: "09",
 		title: "blog",
 		category: "Journal & Insights",
 		color: "#10b981",
