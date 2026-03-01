@@ -12,6 +12,50 @@ export const projects = [
 	},
 	{
 		id: "02",
+		title: "eco-vibe",
+		category: "E-commerce",
+		color: "#16a34a",
+		tech: "React 19 · React Router 7 · Vite · Tailwind 3 · Bun",
+		description:
+			"Sustainable and eco-friendly catalog storefront focusing on conscious consumer goods, blazing-fast cart flow, and elegant product display.",
+		url: "https://eco-vibe.coreyburns.ca/",
+		repo: "https://github.com/corey-burns-dev/eco-vibe",
+	},
+	{
+		id: "03",
+		title: "dark-luxury",
+		category: "E-commerce",
+		color: "#737373",
+		tech: "React 19 · React Router 7 · Vite · Tailwind 4",
+		description:
+			"A high-end luxury e-commerce experience designed with brutalist-inspired dark mode minimalism, tailored for premium fashion.",
+		url: "https://dluxury.coreyburns.ca/",
+		repo: "https://github.com/corey-burns-dev/dark-luxury",
+	},
+	{
+		id: "04",
+		title: "halo-training",
+		category: "E-commerce",
+		color: "#0ea5e9",
+		tech: "React 19 · React Router 7 · Vite · Tailwind 4 · Biome",
+		description:
+			"A modern apparel and training gear storefront with robust filtering, product catalogs, and optimized performance.",
+		url: "https://halo-training.coreyburns.ca/",
+		repo: "https://github.com/corey-burns-dev/halo-training",
+	},
+	{
+		id: "05",
+		title: "ember-kitchen",
+		category: "E-commerce",
+		color: "#ef4444",
+		tech: "React 19 · React Router 7 · Vite · Tailwind 4 · Biome",
+		description:
+			"A sleek, high-conversion e-commerce storefront showcasing premium kitchenware with dynamic routing and cart management.",
+		url: "https://ember-kitchen.coreyburns.ca/",
+		repo: "https://github.com/corey-burns-dev/ember-kitchen",
+	},
+	{
+		id: "06",
 		title: "earthco-market",
 		category: "E-commerce",
 		color: "#16a34a",
@@ -22,7 +66,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/earthco-market",
 	},
 	{
-		id: "03",
+		id: "07",
 		title: "hackernews",
 		category: "News Client",
 		color: "#fb923c",
@@ -33,7 +77,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/hackernews",
 	},
 	{
-		id: "04",
+		id: "08",
 		title: "dream-transmission",
 		category: "Ambient Experience",
 		color: "#a855f7",
@@ -44,7 +88,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/dream-transmission",
 	},
 	{
-		id: "05",
+		id: "09",
 		title: "wake-transmission",
 		category: "Audio-Reactive Visualizer",
 		color: "#06b6d4",
@@ -55,7 +99,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/wake-transmission",
 	},
 	{
-		id: "06",
+		id: "10",
 		title: "image-mage",
 		category: "Media Tooling",
 		color: "#f59e0b",
@@ -66,7 +110,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/image-mage",
 	},
 	{
-		id: "07",
+		id: "11",
 		title: "tools-hub",
 		category: "Developer Utilities",
 		color: "#22c55e",
@@ -77,7 +121,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/tools-hub",
 	},
 	{
-		id: "08",
+		id: "12",
 		title: "games-hub",
 		category: "Arcade Platform",
 		color: "#ef4444",
@@ -86,16 +130,5 @@ export const projects = [
 			"Browser arcade featuring 13 instant-play games including Snake, Pong, Flappy Jump, and 2048, with a single polished hub UI.",
 		url: "https://games.coreyburns.ca",
 		repo: "https://github.com/corey-burns-dev/games-hub",
-	},
-	{
-		id: "09",
-		title: "blog",
-		category: "Journal & Insights",
-		color: "#10b981",
-		tech: "Astro 5 · TypeScript · Tailwind CSS · MDX",
-		description:
-			"Personal blog exploring technical deep-dives, system engineering, and the occasional hobbyist project.",
-		url: "https://blog.coreyburns.ca",
-		repo: "https://github.com/corey-burns-dev/blog",
 	},
 ];
