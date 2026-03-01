@@ -17,18 +17,18 @@ import Footer from "./components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const NAV_ITEMS = [
+	{ id: "hero", label: "Home" },
+	{ id: "projects", label: "Projects" },
+	{ id: "skills", label: "Skills" },
+	{ id: "about", label: "About" },
+	{ id: "contact", label: "Contact" },
+];
+
 export default function App() {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [activeSection, setActiveSection] = useState("hero");
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-	const navItems = [
-		{ id: "hero", label: "Home" },
-		{ id: "projects", label: "Projects" },
-		{ id: "skills", label: "Skills" },
-		{ id: "about", label: "About" },
-		{ id: "contact", label: "Contact" },
-	];
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
@@ -92,7 +92,7 @@ export default function App() {
 			});
 
 			// Section tracking
-			navItems.forEach((item) => {
+			NAV_ITEMS.forEach((item) => {
 				ScrollTrigger.create({
 					trigger: `#vdf-${item.id}`,
 					start: "top center",
@@ -129,22 +129,22 @@ export default function App() {
 			className="min-h-screen overflow-x-hidden text-white bg-[#0a0a0a] selection:bg-red-500/30 font-sans"
 		>
 			<div className="noise" />
-			
+
 			<Navigation
 				activeSection={activeSection}
 				isMenuOpen={isMenuOpen}
 				setIsMenuOpen={setIsMenuOpen}
 				scrollTo={scrollTo}
-				navItems={navItems}
+				navItems={NAV_ITEMS}
 			/>
 
 			<main className="relative z-10">
 				<Hero
 					scrollTo={scrollTo}
-					navItems={navItems}
+					navItems={NAV_ITEMS}
 					activeSection={activeSection}
 				/>
-				<div className="max-w-[1600px] mx-auto">
+				<div className="mx-auto max-w-400">
 					<Projects projects={projects} />
 					<Skills skills={skills} />
 					<About />
