@@ -13,22 +13,30 @@ export default function About() {
 					<div className="space-y-8 text-lg leading-relaxed text-neutral-400 font-medium">
 						<p className="relative">
 							<span className="absolute -left-6 top-0 text-red-500/20 text-4xl font-black">"</span>
-							I am a passionate full-stack developer driven by a deep curiosity
-							for how systems operate beneath the surface. My expertise spans
-							across Linux, homelabbing, and building robust projects from the
-							ground up, seamlessly blending clean aesthetics with practical
-							engineering principles.
+							I am a full-stack developer who lives at the intersection of
+							technical precision and aesthetic design. My expertise spans from
+							architecting robust systems to crafting fluid, high-fidelity user
+							interfaces, always aiming to blend deep-level engineering with a
+							polished, modern feel.
 						</p>
 						<p>
-							My journey began with foundational web technologies like HTML, CSS,
-							and JavaScript, and has since evolved into building modern
-							applications with Next.js, React, and TypeScript. I am
-							particularly fascinated by the operational side of development,
-							taking pride in containerizing services with Docker and
-							orchestrating full application stacks on my own infrastructure.
+							My journey started in the terminal, long before I ever touched a
+							web browser. Operating Linux-based IRC and FTP servers was my
+							introduction to the world of system orchestration and digital
+							infrastructure. That early hands-on experience still informs my
+							work today as I build modern applications with Next.js, React, and
+							TypeScript.
+						</p>
+						<p>
+							I'm especially passionate about the visual and interactive side of
+							development. I believe that a great site should be as beautiful as
+							it is functional, so I dedicate a lot of my focus to creating
+							seamless, intuitive frontends. Bridging the gap between a
+							rock-solid backend and a stunning user experience is what drives
+							my creative process.
 						</p>
 						<p className="text-base text-neutral-500 italic">
-							When I'm not writing code or managing servers, you can find me
+							When I'm not writing code or managing systems, you can find me
 							exploring the worlds of anime, diving into great TV and movies, or
 							gaming on my Steam Deck. I also believe in maintaining a healthy
 							balance by staying active through biking, hiking, and hitting the
