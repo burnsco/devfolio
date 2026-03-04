@@ -50,7 +50,10 @@ export default function About() {
 							<img
 								src="/images/photo.jpg"
 								alt="Portrait of Corey Burns"
+								width={627}
+								height={639}
 								loading="lazy"
+								decoding="async"
 								className="object-cover object-center w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
 							/>
 							<div className="absolute inset-0 bg-linear-to-t from-neutral-950/80 via-transparent to-red-500/5" />

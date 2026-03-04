@@ -61,17 +61,16 @@ export default function Projects({ projects }: ProjectsProps) {
 										</span>
 									</a>
 								</div>
-								<button
-									type="button"
-									className="text-left bg-transparent border-none cursor-pointer group/title block w-full"
-									onClick={() =>
-										window.open(project.url, "_blank", "noopener,noreferrer")
-									}
+								<a
+									href={project.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="group/title block w-full"
 								>
 									<h3 className="text-5xl font-black tracking-tighter uppercase transition-all duration-500 md:text-8xl group-hover/title:translate-x-4 text-white [-webkit-text-stroke:1px_rgba(255,255,255,0.2)] group-hover/title:[-webkit-text-stroke:0px] group-hover/title:text-(--project-color)">
 										{project.title}
 									</h3>
-								</button>
+								</a>
 								<p className="max-w-xl mt-6 text-lg leading-relaxed text-neutral-400 font-medium">
 									{project.description}
 								</p>
