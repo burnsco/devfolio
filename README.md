@@ -1,75 +1,98 @@
-# devfolio
+# devfolio | coreyburns.ca
 
-A modern, animated developer portfolio built with Astro, TypeScript, Tailwind CSS, and GSAP.
+[![Astro](https://img.shields.io/badge/Astro-5.0-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![GSAP](https://img.shields.io/badge/Animations-GSAP-88CE02?logo=greensock&logoColor=white)](https://gsap.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Overview
+A high-performance, cinematic developer portfolio featuring smooth scroll-driven animations, a brutalist-inspired dark aesthetic, and a perfect Lighthouse profile.
 
-`devfolio` is a single-page portfolio experience with smooth section navigation, scroll-based motion, and bold visual styling.
-It uses Astro as the site framework for high performance and minimal JavaScript.
+[**Live Demo →**](https://coreyburns.ca)
 
-## Features
+---
 
-- Full-page portfolio sections: Hero, Projects, Skills, About, Contact
-- GSAP-powered animations with `ScrollTrigger`
-- Active section tracking in navigation
-- Responsive layout for desktop and mobile
-- Utility-first styling with Tailwind CSS
-- Fast local development and production builds via Astro
+## ⚡ Performance First
 
-## Tech Stack
+This portfolio is engineered for speed. By migrating from a heavy client-side React architecture to **Astro-native components**, we achieved a perfect score across all Lighthouse metrics.
 
-- TypeScript
-- Astro 5
-- Tailwind CSS 4
-- GSAP
-## Getting Started
+| Metric | Score |
+| :--- | :--- |
+| 🚀 **Performance** | **100** |
+| ♿ **Accessibility** | **100** |
+| 🛡️ **Best Practices** | **100** |
+| 🔍 **SEO** | **100** |
+
+---
+
+## ✨ Features
+
+- **Cinematic Experience:** Immersive GSAP ScrollTrigger animations that bring the interface to life.
+- **Hybrid Architecture:** Optimized Astro components with minimal client-side JS for lightning-fast delivery.
+- **Responsive Navigation:** Sophisticated dual-nav system (Top Nav + Side Nav) with active section tracking.
+- **Self-Hosted Assets:** Optimized Fontsource integration and local assets for zero external dependencies.
+- **Brutalist Design:** Bold typography, noise textures, and red-on-black accents for a distinct technical identity.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Astro 5](https://astro.build/) (Static Site Generation)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animations:** [GSAP](https://gsap.com/) (ScrollTrigger & Observer)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Fonts:** [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) & [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk)
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+ (recommended)
-- npm (or bun)
+- **Node.js** 20.x or higher
+- **Bun** (recommended) or **npm**
 
-### Install
-
-```bash
-npm install
-```
-
-### Run Development Server
+### Installation
 
 ```bash
-npm run dev
+# Clone the repository
+git clone https://github.com/corey-burns-dev/devfolio.git
+
+# Install dependencies
+bun install
 ```
 
-### Build for Production
+### Development
 
 ```bash
-npm run build
+bun dev
 ```
 
-### Preview Production Build
+### Build & Preview
 
 ```bash
-npm run preview
+bun run build
+bun run preview
 ```
 
-## Project Structure
+---
+
+## 📂 Project Structure
 
 ```text
-.
-├── astro.config.mjs
-├── src/
-│   ├── App.tsx
-│   ├── env.d.ts
-│   ├── index.css
-│   └── pages/
-│       └── index.astro
-├── package.json
-├── tailwind.config.js
-└── tsconfig.json
+src/
+├── components/   # Astro-native UI components
+├── data/         # Project & Skill definitions
+├── layouts/      # Base HTML templates
+├── pages/        # Route definitions (index.astro)
+└── styles/       # Global CSS & Tailwind config
 ```
 
-## Notes
+---
 
-- `node_modules/` and `dist/` are intentionally git-ignored.
-- The current portfolio content is sample content and can be customized in `src/App.tsx`.
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+Built with ❤️ by [Corey Burns](https://coreyburns.ca)
