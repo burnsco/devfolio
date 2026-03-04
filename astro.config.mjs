@@ -5,4 +5,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
 	site: "https://coreyburns.ca",
 	integrations: [react(), sitemap()],
+	build: {
+		inlineStylesheets: "always",
+	},
 });

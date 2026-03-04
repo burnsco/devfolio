@@ -1,6 +1,33 @@
 ---
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
 import "../index.css";
-import App from "../App";
+
+// Data
+import { projects } from "../data/projects";
+import { skills } from "../data/skills";
+
+// Components
+import Navigation from "../components/Navigation";
+import Hero from "../components/Hero.astro";
+import Projects from "../components/Projects.astro";
+import Skills from "../components/Skills.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+
+const NAV_ITEMS = [
+	{ id: "hero", label: "Home" },
+	{ id: "projects", label: "Projects" },
+	{ id: "skills", label: "Skills" },
+	{ id: "about", label: "About" },
+	{ id: "contact", label: "Contact" },
+];
 ---
 
 <!doctype html>
@@ -14,7 +41,7 @@ import App from "../App";
 		<meta name="title" content="Corey Burns — Full-Stack Developer" />
 		<meta
 			name="description"
-			content="Corey Burns is a full-stack developer specializing in React, Node.js, and cloud-native infrastructure. Explore projects in audio-reactive visuals, news clients, and social platforms."
+			content="Corey Burns is a full-stack developer building technically solid and visually refined software. Specializing in Next.js, React, and TypeScript, with a background in systems and infrastructure."
 		/>
 		<meta name="author" content="Corey Burns" />
 		<meta
@@ -33,7 +60,7 @@ import App from "../App";
 		/>
 		<meta
 			property="og:description"
-			content="Corey Burns is a full-stack developer specializing in React, Node.js, and cloud-native infrastructure. Explore projects in audio-reactive visuals, news clients, and social platforms."
+			content="Corey Burns is a full-stack developer building technically solid and visually refined software. Specializing in Next.js, React, and TypeScript, with a background in systems and infrastructure."
 		/>
 		<meta
 			property="og:image"
@@ -49,17 +76,12 @@ import App from "../App";
 		/>
 		<meta
 			property="twitter:description"
-			content="Corey Burns is a full-stack developer specializing in React, Node.js, and cloud-native infrastructure. Explore projects in audio-reactive visuals, news clients, and social platforms."
+			content="Corey Burns is a full-stack developer building technically solid and visually refined software. Specializing in Next.js, React, and TypeScript, with a background in systems and infrastructure."
 		/>
 		<meta
 			property="twitter:image"
 			content="https://coreyburns.ca/images/photo.jpg"
 		/>
-
-		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
 
 		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -73,11 +95,141 @@ import App from "../App";
 				"url": "https://coreyburns.ca",
 				"jobTitle": "Full-Stack Developer",
 				"sameAs": ["https://github.com/corey-burns-dev"],
-				"description": "Full-stack developer specializing in React, Node.js, and cloud-native infrastructure."
+				"description": "Full-stack developer building technically solid and visually refined software, specializing in Next.js, React, and TypeScript."
 			}
 		</script>
 	</head>
-	<body>
-		<App client:load />
+	<body class="min-h-screen overflow-x-hidden text-white bg-[#0a0a0a] selection:bg-red-500/30 font-sans">
+		<div class="noise"></div>
+		
+		<Navigation client:load navItems={NAV_ITEMS} activeSection="hero" />
+
+		<main class="relative z-10">
+			<Hero navItems={NAV_ITEMS} activeSection="hero" />
+			<div class="mx-auto max-w-400">
+				<Projects projects={projects} />
+				<Skills skills={skills} />
+				<About />
+				<Contact />
+			</div>
+		</main>
+
+		<Footer />
+
+		<script>
+			import gsap from "gsap";
+			import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			// Initialize animations
+			const init = () => {
+				// Skew effect on scroll
+				const proxy = { skew: 0 };
+				const skewSetter = gsap.quickSetter(".vdf-skew", "skewY", "deg");
+				const clamp = gsap.utils.clamp(-20, 20);
+
+				ScrollTrigger.create({
+					onUpdate: (self) => {
+						const skew = clamp(self.getVelocity() / -300);
+						if (Math.abs(skew) > Math.abs(proxy.skew)) {
+							proxy.skew = skew;
+							gsap.to(proxy, {
+								skew: 0,
+								duration: 0.8,
+								ease: "power3",
+								overwrite: true,
+								onUpdate: () => skewSetter(proxy.skew),
+							});
+						}
+					},
+				});
+
+				// Reveal animations
+				gsap.utils.toArray(".vdf-reveal").forEach((el: any) => {
+					gsap.fromTo(
+						el,
+						{ opacity: 0, y: 50 },
+						{
+							opacity: 1,
+							y: 0,
+							duration: 1.2,
+							ease: "power4.out",
+							scrollTrigger: {
+								trigger: el,
+								start: "top 90%",
+								toggleActions: "play none none reverse",
+							},
+						}
+					);
+				});
+
+				// Stagger animations
+				gsap.utils.toArray(".vdf-stagger").forEach((el: any) => {
+					gsap.fromTo(
+						el,
+						{ opacity: 0, x: -20 },
+						{
+							opacity: 1,
+							x: 0,
+							duration: 0.8,
+							ease: "power3.out",
+							scrollTrigger: {
+								trigger: el,
+								start: "top 95%",
+								toggleActions: "play none none reverse",
+							},
+						}
+					);
+				});
+
+				// Section tracking
+				const navItems = ["hero", "projects", "skills", "about", "contact"];
+				navItems.forEach((id) => {
+					ScrollTrigger.create({
+						trigger: `#vdf-${id}`,
+						start: "top center",
+						end: "bottom center",
+						onEnter: () => updateNav(id),
+						onEnterBack: () => updateNav(id),
+					});
+				});
+			};
+
+			const updateNav = (id: string) => {
+				const event = new CustomEvent("sectionChange", { detail: id });
+				window.dispatchEvent(event);
+			};
+
+			// Handle scroll to
+			window.addEventListener("scrollTo", (e: any) => {
+				scrollTo(e.detail);
+			});
+
+			const scrollTo = (id: string) => {
+				const element = document.getElementById(`vdf-${id}`);
+				if (element) {
+					const bodyRect = document.body.getBoundingClientRect().top;
+					const elementRect = element.getBoundingClientRect().top;
+					const elementPosition = elementRect - bodyRect;
+
+					window.scrollTo({
+						top: elementPosition,
+						behavior: "smooth",
+					});
+				}
+			};
+
+			// Listen for data-scroll-to clicks
+			document.addEventListener("click", (e: any) => {
+				const target = e.target.closest("[data-scroll-to]");
+				if (target) {
+					const id = target.getAttribute("data-scroll-to");
+					scrollTo(id);
+				}
+			});
+
+			init();
+		</script>
 	</body>
 </html>

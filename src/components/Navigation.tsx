@@ -1,24 +1,32 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 interface NavProps {
-	activeSection: string;
-	isMenuOpen: boolean;
-	setIsMenuOpen: (open: boolean) => void;
-	scrollTo: (id: string) => void;
 	navItems: { id: string; label: string }[];
 }
 
 export default function Navigation({
-	activeSection,
-	isMenuOpen,
-	setIsMenuOpen,
-	scrollTo,
 	navItems,
 }: NavProps) {
+	const [activeSection, setActiveSection] = useState("hero");
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const menuOverlayRef = useRef<HTMLButtonElement>(null);
 	const menuLinksRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+	useEffect(() => {
+		const handleSectionChange = (e: any) => {
+			setActiveSection(e.detail);
+		};
+		window.addEventListener("sectionChange", handleSectionChange);
+		return () => window.removeEventListener("sectionChange", handleSectionChange);
+	}, []);
+
+	const scrollTo = (id: string) => {
+		const event = new CustomEvent("scrollTo", { detail: id });
+		window.dispatchEvent(event);
+		setIsMenuOpen(false);
+	};
 
 	useEffect(() => {
 		if (isMenuOpen) {
@@ -84,7 +92,7 @@ export default function Navigation({
 							className={`text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 ${
 								activeSection === item.id
 									? "text-red-500"
-									: "text-white/40 hover:text-white"
+									: "text-white/60 hover:text-white"
 							} hover:tracking-[0.4em]`}
 						>
 							{item.label}
@@ -141,7 +149,7 @@ export default function Navigation({
 								activeSection === item.id ? "text-red-500" : "text-white"
 							}`}
 						>
-							<span className="mr-4 text-xs font-mono text-red-500/40">
+							<span className="mr-4 text-xs font-mono text-red-500/70">
 								{String(index + 1).padStart(2, "0")}
 							</span>
 							{item.label}
