@@ -1,11 +1,11 @@
 # devfolio
 
-A modern, animated developer portfolio built with Astro, React, TypeScript, Tailwind CSS, and GSAP.
+A modern, animated developer portfolio built with Astro, TypeScript, Tailwind CSS, and GSAP.
 
 ## Overview
 
-`devfolio` is a single-page portfolio experience with smooth section navigation, scroll-based motion, and bold visual styling.  
-It uses Astro as the site framework and mounts the existing React portfolio app as a client-side island to preserve behavior and visuals.
+`devfolio` is a single-page portfolio experience with smooth section navigation, scroll-based motion, and bold visual styling.
+It uses Astro as the site framework for high performance and minimal JavaScript.
 
 ## Features
 
@@ -15,16 +15,13 @@ It uses Astro as the site framework and mounts the existing React portfolio app 
 - Responsive layout for desktop and mobile
 - Utility-first styling with Tailwind CSS
 - Fast local development and production builds via Astro
-- React app mounted with `client:load` in Astro
 
 ## Tech Stack
 
-- React 19
 - TypeScript
 - Astro 5
 - Tailwind CSS 4
 - GSAP
-
 ## Getting Started
 
 ### Prerequisites

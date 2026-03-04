@@ -1,0 +1,49 @@
+---
+interface Props {
+	navItems: { id: string; label: string }[];
+}
+
+const { navItems } = Astro.props;
+---
+
+<div id="side-nav" class="absolute flex-col hidden gap-4 -translate-y-1/2 top-1/2 right-12 xl:flex">
+	{navItems.map((item) => (
+		<button
+			type="button"
+			data-scroll-to={item.id}
+			data-side-link={item.id}
+			class="group flex items-center gap-4 text-right"
+		>
+			<span class="side-link-text text-[9px] uppercase tracking-[0.2em] font-bold transition-all duration-300 text-white opacity-0 group-hover:opacity-40">
+				{item.label}
+			</span>
+			<div class="side-link-bar w-12 h-px transition-all duration-500 bg-white/10 group-hover:bg-white/30"></div>
+		</button>
+	))}
+</div>
+
+<script>
+	const sideLinks = document.querySelectorAll("[data-side-link]");
+
+	window.addEventListener("sectionChange", (e: any) => {
+		const activeId = e.detail;
+		
+		sideLinks.forEach((link) => {
+			const id = link.getAttribute("data-side-link");
+			const text = link.querySelector(".side-link-text");
+			const bar = link.querySelector(".side-link-bar");
+
+			if (id === activeId) {
+				text?.classList.add("text-red-500", "opacity-100");
+				text?.classList.remove("text-white", "opacity-0");
+				bar?.classList.add("bg-red-500", "w-16");
+				bar?.classList.remove("bg-white/10", "w-12");
+			} else {
+				text?.classList.remove("text-red-500", "opacity-100");
+				text?.classList.add("text-white", "opacity-0");
+				bar?.classList.remove("bg-red-500", "w-16");
+				bar?.classList.add("bg-white/10", "w-12");
+			}
+		});
+	});
+</script>

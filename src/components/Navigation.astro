@@ -1,0 +1,214 @@
+---
+interface Props {
+	navItems: { id: string; label: string }[];
+	activeSection?: string;
+}
+
+const { navItems, activeSection = "hero" } = Astro.props;
+---
+
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-12 md:py-8 transition-all duration-300">
+	<div class="absolute inset-0 bg-neutral-950/20 backdrop-blur-md border-b border-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+	
+	<button
+		type="button"
+		data-scroll-to="hero"
+		class="relative z-10 text-2xl font-black tracking-tighter uppercase text-white mix-blend-difference"
+	>
+		CB<span class="text-red-500">.</span>
+	</button>
+	
+	<div class="relative z-10 items-center hidden md:flex gap-10">
+		{navItems.map((item) => (
+			<button
+				type="button"
+				data-scroll-to={item.id}
+				data-nav-link={item.id}
+				class={`text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 ${
+					activeSection === item.id
+						? "text-red-500"
+						: "text-white/60 hover:text-white"
+				} hover:tracking-[0.4em]`}
+			>
+				{item.label}
+			</button>
+		))}
+	</div>
+
+	<button
+		type="button"
+		id="menu-toggle"
+		class="relative z-10 flex flex-col gap-1.5 md:hidden p-2 group"
+		aria-label="Toggle Menu"
+	>
+		<span class="menu-bar w-6 h-0.5 bg-white transition-all duration-300"></span>
+		<span class="menu-bar w-6 h-0.5 bg-white transition-all duration-300"></span>
+		<span class="menu-bar w-6 h-0.5 bg-white transition-all duration-300"></span>
+	</button>
+</nav>
+
+<button
+	type="button"
+	id="menu-overlay"
+	class="fixed inset-0 z-50 transition-opacity pointer-events-none bg-neutral-950/90 backdrop-blur-md opacity-0 border-none w-full h-full text-transparent cursor-default"
+	aria-label="Close Menu"
+></button>
+
+<div
+	id="mobile-menu"
+	class="fixed top-0 right-0 bottom-0 w-[80%] max-w-[400px] bg-neutral-900 z-50 translate-x-full flex flex-col justify-center px-12 border-l border-white/5"
+>
+	<div class="flex flex-col gap-8">
+		{navItems.map((item, index) => (
+			<button
+				type="button"
+				data-scroll-to={item.id}
+				data-mobile-link={item.id}
+				class={`mobile-link text-left text-3xl font-black uppercase tracking-tighter transition-colors duration-300 ${
+					activeSection === item.id ? "text-red-500" : "text-white"
+				}`}
+			>
+				<span class="mr-4 text-xs font-mono text-red-500">
+					{String(index + 1).padStart(2, "0")}
+				</span>
+				{item.label}
+			</button>
+		))}
+	</div>
+
+	<div class="absolute bottom-12 left-12 right-12">
+		<div class="w-full h-px mb-8 bg-white/5"></div>
+		<div class="flex gap-6">
+			<a
+				href="https://github.com/corey-burns-dev"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="opacity-50 hover:opacity-100 transition-opacity"
+			>
+				<img
+					src="/icons/github.svg"
+					alt="GitHub"
+					class="w-6 h-6 invert"
+				/>
+			</a>
+			<a
+				href="https://linkedin.com/in/corey-burns"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="opacity-50 hover:opacity-100 transition-opacity"
+			>
+				<img
+					src="/icons/linkedin.svg"
+					alt="LinkedIn"
+					class="w-6 h-6 invert"
+				/>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	import gsap from "gsap";
+
+	const menuToggle = document.getElementById("menu-toggle");
+	const menuOverlay = document.getElementById("menu-overlay");
+	const mobileMenu = document.getElementById("mobile-menu");
+	const menuBars = document.querySelectorAll(".menu-bar");
+	const mobileLinks = document.querySelectorAll(".mobile-link");
+	const navLinks = document.querySelectorAll("[data-nav-link]");
+	
+	let isMenuOpen = false;
+
+	const toggleMenu = () => {
+		isMenuOpen = !isMenuOpen;
+		
+		if (isMenuOpen) {
+			document.body.style.overflow = "hidden";
+			
+			// Button animation
+			gsap.to(menuBars[0], { rotate: 45, y: 8, backgroundColor: "#ef4444", duration: 0.3 });
+			gsap.to(menuBars[1], { opacity: 0, duration: 0.3 });
+			gsap.to(menuBars[2], { rotate: -45, y: -8, backgroundColor: "#ef4444", duration: 0.3 });
+
+			gsap.to(menuOverlay, {
+				opacity: 1,
+				pointerEvents: "auto",
+				duration: 0.5,
+				ease: "power3.out",
+			});
+			gsap.to(mobileMenu, {
+				x: 0,
+				duration: 0.6,
+				ease: "power4.out",
+			});
+			gsap.fromTo(
+				mobileLinks,
+				{ y: 50, opacity: 0 },
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.8,
+					stagger: 0.1,
+					ease: "power4.out",
+					delay: 0.2,
+				},
+			);
+		} else {
+			document.body.style.overflow = "auto";
+			
+			// Button animation
+			gsap.to(menuBars[0], { rotate: 0, y: 0, backgroundColor: "#ffffff", duration: 0.3 });
+			gsap.to(menuBars[1], { opacity: 1, duration: 0.3 });
+			gsap.to(menuBars[2], { rotate: 0, y: 0, backgroundColor: "#ffffff", duration: 0.3 });
+
+			gsap.to(mobileMenu, {
+				x: "100%",
+				duration: 0.5,
+				ease: "power3.in",
+			});
+			gsap.to(menuOverlay, {
+				opacity: 0,
+				pointerEvents: "none",
+				duration: 0.5,
+				ease: "power3.in",
+			});
+		}
+	};
+
+	menuToggle?.addEventListener("click", toggleMenu);
+	menuOverlay?.addEventListener("click", toggleMenu);
+
+	// Handle section changes from index.astro
+	window.addEventListener("sectionChange", (e: any) => {
+		const activeId = e.detail;
+		
+		navLinks.forEach((link) => {
+			const id = link.getAttribute("data-nav-link");
+			if (id === activeId) {
+				link.classList.add("text-red-500");
+				link.classList.remove("text-white/60");
+			} else {
+				link.classList.remove("text-red-500");
+				link.classList.add("text-white/60");
+			}
+		});
+
+		mobileLinks.forEach((link) => {
+			const id = link.getAttribute("data-mobile-link");
+			if (id === activeId) {
+				link.classList.add("text-red-500");
+				link.classList.remove("text-white");
+			} else {
+				link.classList.remove("text-red-500");
+				link.classList.add("text-white");
+			}
+		});
+	});
+
+	// Close menu on link click
+	document.querySelectorAll("[data-scroll-to]").forEach(button => {
+		button.addEventListener("click", () => {
+			if (isMenuOpen) toggleMenu();
+		});
+	});
+</script>

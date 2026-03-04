@@ -1,5 +1,5 @@
 ---
-import SideNav from "./SideNav";
+import SideNav from "./SideNav.astro";
 
 interface Props {
 	navItems: { id: string; label: string }[];
@@ -12,7 +12,7 @@ const { navItems } = Astro.props;
 	id="vdf-hero"
 	class="relative flex flex-col justify-center h-screen px-8 pt-20 lg:px-24"
 >
-	<SideNav client:load navItems={navItems} />
+	<SideNav navItems={navItems} />
 
 	<p class="text-red-500 uppercase tracking-[0.5em] text-[10px] font-bold mb-8 opacity-80">
 		Full-Stack Developer & Systems Enthusiast

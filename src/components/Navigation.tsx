@@ -149,7 +149,7 @@ export default function Navigation({
 								activeSection === item.id ? "text-red-500" : "text-white"
 							}`}
 						>
-							<span className="mr-4 text-xs font-mono text-red-500/70">
+							<span className="mr-4 text-xs font-mono text-red-500">
 								{String(index + 1).padStart(2, "0")}
 							</span>
 							{item.label}
