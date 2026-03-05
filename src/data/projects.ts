@@ -12,6 +12,17 @@ export const projects = [
 	},
 	{
 		id: "02",
+		title: "fractal-art",
+		category: "Creative Coding",
+		color: "#8b5cf6",
+		tech: "Astro 5 · Three.js · GLSL · Raymarching",
+		description:
+			"Realtime fractal art playground featuring 11 3D fractal modes, ray-marched shaders, and dynamic post-processing.",
+		url: "https://fractal-art.coreyburns.ca",
+		repo: "https://github.com/corey-burns-dev/fractal-art",
+	},
+	{
+		id: "03",
 		title: "eco-vibe",
 		category: "E-commerce",
 		color: "#16a34a",
@@ -22,7 +33,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/eco-vibe",
 	},
 	{
-		id: "03",
+		id: "04",
 		title: "dark-luxury",
 		category: "E-commerce",
 		color: "#737373",
@@ -33,7 +44,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/dark-luxury",
 	},
 	{
-		id: "04",
+		id: "05",
 		title: "halo-training",
 		category: "E-commerce",
 		color: "#0ea5e9",
@@ -44,7 +55,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/halo-training",
 	},
 	{
-		id: "05",
+		id: "06",
 		title: "ember-kitchen",
 		category: "E-commerce",
 		color: "#ef4444",
@@ -55,7 +66,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/ember-kitchen",
 	},
 	{
-		id: "06",
+		id: "07",
 		title: "earthco-market",
 		category: "E-commerce",
 		color: "#16a34a",
@@ -66,7 +77,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/earthco-market",
 	},
 	{
-		id: "07",
+		id: "08",
 		title: "hackernews",
 		category: "News Client",
 		color: "#fb923c",
@@ -77,7 +88,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/hackernews",
 	},
 	{
-		id: "08",
+		id: "09",
 		title: "dream-transmission",
 		category: "Ambient Experience",
 		color: "#a855f7",
@@ -88,7 +99,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/dream-transmission",
 	},
 	{
-		id: "09",
+		id: "10",
 		title: "wake-transmission",
 		category: "Audio-Reactive Visualizer",
 		color: "#06b6d4",
@@ -99,7 +110,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/wake-transmission",
 	},
 	{
-		id: "10",
+		id: "11",
 		title: "image-mage",
 		category: "Media Tooling",
 		color: "#f59e0b",
@@ -110,7 +121,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/image-mage",
 	},
 	{
-		id: "11",
+		id: "12",
 		title: "tools-hub",
 		category: "Developer Utilities",
 		color: "#22c55e",
@@ -121,7 +132,7 @@ export const projects = [
 		repo: "https://github.com/corey-burns-dev/tools-hub",
 	},
 	{
-		id: "12",
+		id: "13",
 		title: "games-hub",
 		category: "Arcade Platform",
 		color: "#ef4444",
