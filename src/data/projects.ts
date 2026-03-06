@@ -12,14 +12,14 @@ export const projects = [
 	},
 	{
 		id: "02",
-		title: "fractal-art",
+		title: "fractal-lab",
 		category: "Creative Coding",
 		color: "#8b5cf6",
 		tech: "Astro 5 · Three.js · GLSL · Raymarching",
 		description:
 			"Realtime fractal art playground featuring 11 3D fractal modes, ray-marched shaders, and dynamic post-processing.",
-		url: "https://fractal-art.coreyburns.ca",
-		repo: "https://github.com/corey-burns-dev/fractal-art",
+		url: "https://fractals.coreyburns.ca",
+		repo: "https://github.com/corey-burns-dev/fractal-lab",
 	},
 	{
 		id: "03",
