@@ -18,26 +18,41 @@ interface ProjectCategory {
 }
 
 interface Props {
-	projectCategories: ProjectCategory[];
+	projectCategories?: ProjectCategory[];
+    projects?: Project[];
 }
 
-const { projectCategories } = Astro.props;
+const { projectCategories, projects } = Astro.props;
 
 // Flatten the projects and add parent category for filtering
-const allProjects = projectCategories.flatMap(cat => 
-    cat.projects.map(p => ({ 
-        ...p, 
-        parentCategory: cat.name 
-    }))
-);
+// Handle both categorized and flat project lists
+let allProjects: (Project & { parentCategory: string })[] = [];
+let categories: string[] = ["All"];
+
+if (projectCategories && Array.isArray(projectCategories)) {
+    allProjects = projectCategories.flatMap(cat => 
+        cat.projects.map(p => ({ 
+            ...p, 
+            parentCategory: cat.name 
+        }))
+    );
+    categories = ["All", ...projectCategories.map(cat => cat.name)];
+} else if (projects && Array.isArray(projects)) {
+    // If a flat list is provided, group by their internal category for filtering
+    allProjects = projects.map(p => ({
+        ...p,
+        parentCategory: p.category
+    }));
+    const uniqueCategories = [...new Set(projects.map(p => p.category))];
+    categories = ["All", ...uniqueCategories];
+}
 
 const totalProjects = allProjects.length;
-const categories = ["All", ...projectCategories.map(cat => cat.name)];
 
 // Flatten skills for easy lookup
 const skillIcons = skillGroups.flatMap(group => group.items);
 const getSkillIcon = (name: string) => {
-    // Normalize names for better matching (e.g., "Tailwind" -> "Tailwind CSS")
+    // Normalize names for better matching
     const searchName = name.trim().toLowerCase();
     const skill = skillIcons.find(s => 
         s.name.toLowerCase() === searchName || 
