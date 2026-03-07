@@ -33,7 +33,7 @@ const totalProjects = allProjects.length;
 const categories = ["All", ...projectCategories.map(cat => cat.name)];
 ---
 
-<section id="vdf-projects" class="px-8 py-32 lg:px-24 scroll-mt-20 overflow-hidden">
+<section id="vdf-projects" class="px-8 py-32 lg:px-24 scroll-mt-20">
 	<div class="flex flex-col xl:flex-row items-start xl:items-end justify-between mb-16 vdf-reveal gap-12">
 		<div class="max-w-2xl">
 			<p class="mb-4 font-mono text-sm tracking-[0.3em] text-red-500 uppercase font-semibold">
@@ -70,10 +70,10 @@ const categories = ["All", ...projectCategories.map(cat => cat.name)];
         </div>
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 project-grid min-h-[600px]">
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 project-grid items-start">
 		{allProjects.map((project) => (
 			<div
-				class="project-card group relative flex flex-col h-full bg-[#0d0d0d]/50 border border-white/5 rounded-3xl p-8 hover:bg-[#121212] transition-all duration-700 ease-out vdf-reveal overflow-hidden"
+				class="project-card group relative flex flex-col bg-[#0d0d0d]/50 border border-white/5 rounded-3xl p-8 hover:bg-[#121212] transition-all duration-700 ease-out vdf-reveal overflow-hidden h-full"
 				data-category={project.parentCategory}
 				style={`--project-color: ${project.color}`}
 			>
@@ -148,6 +148,7 @@ const categories = ["All", ...projectCategories.map(cat => cat.name)];
 
 <script>
     import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
@@ -175,23 +176,29 @@ const categories = ["All", ...projectCategories.map(cat => cat.name)];
                         opacity: 1,
                         scale: 1,
                         y: 0,
-                        duration: 0.6,
-                        ease: "power4.out",
+                        duration: 0.5,
+                        ease: "power3.out",
                         clearProps: "all"
                     });
                 } else {
                     gsap.to(card, {
                         opacity: 0,
-                        scale: 0.95,
+                        scale: 0.9,
                         y: 20,
-                        duration: 0.4,
+                        duration: 0.3,
                         ease: "power2.in",
                         onComplete: () => {
                             (card as HTMLElement).style.display = 'none';
+                            ScrollTrigger.refresh();
                         }
                     });
                 }
             });
+
+            // Refresh ScrollTrigger after all animations (delayed slightly to ensure layout reflow)
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 550);
         });
     });
 
@@ -207,5 +214,10 @@ const categories = ["All", ...projectCategories.map(cat => cat.name)];
     
     .filter-btn[aria-pressed="true"] {
         color: white;
+    }
+
+    /* Prevent huge heights when filtered */
+    .project-grid {
+        align-items: stretch;
     }
 </style>
