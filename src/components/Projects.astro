@@ -10,90 +10,202 @@ interface Project {
 	repo: string;
 }
 
-interface Props {
+interface ProjectCategory {
+	name: string;
 	projects: Project[];
 }
 
-const { projects } = Astro.props;
+interface Props {
+	projectCategories: ProjectCategory[];
+}
+
+const { projectCategories } = Astro.props;
+
+// Flatten the projects and add parent category for filtering
+const allProjects = projectCategories.flatMap(cat => 
+    cat.projects.map(p => ({ 
+        ...p, 
+        parentCategory: cat.name 
+    }))
+);
+
+const totalProjects = allProjects.length;
+const categories = ["All", ...projectCategories.map(cat => cat.name)];
 ---
 
-<section id="vdf-projects" class="px-8 py-32 lg:px-24 scroll-mt-20">
-	<div class="flex items-end justify-between mb-20 vdf-reveal">
-		<div>
-			<p class="mb-2 font-mono text-sm tracking-widest text-red-500 uppercase">
-				Featured Work
+<section id="vdf-projects" class="px-8 py-32 lg:px-24 scroll-mt-20 overflow-hidden">
+	<div class="flex flex-col xl:flex-row items-start xl:items-end justify-between mb-16 vdf-reveal gap-12">
+		<div class="max-w-2xl">
+			<p class="mb-4 font-mono text-sm tracking-[0.3em] text-red-500 uppercase font-semibold">
+				Selected Works
 			</p>
-			<h2 class="text-5xl font-black tracking-tighter uppercase md:text-7xl">
+			<h2 class="text-6xl font-black tracking-tighter uppercase md:text-8xl leading-[0.9]">
 				Projects
 			</h2>
 		</div>
-		<p class="hidden font-mono text-sm md:block text-neutral-500">
-			{String(projects.length).padStart(2, "0")} Selected
-		</p>
+
+        <div class="flex flex-col gap-6 w-full xl:w-auto">
+            <div class="flex items-center justify-between xl:justify-end gap-4">
+                <p class="font-mono text-xs tracking-widest text-neutral-500 uppercase">
+                    Filter by Category
+                </p>
+                <div class="h-px w-12 bg-neutral-800 hidden xl:block"></div>
+                <p class="font-mono text-xs tracking-widest text-neutral-500 uppercase">
+                    {String(totalProjects).padStart(2, "0")} Total
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                {categories.map((cat) => (
+                    <button
+                        class="filter-btn group relative px-5 py-2.5 rounded-full border border-neutral-800 text-neutral-500 font-mono text-[10px] uppercase tracking-widest transition-all duration-500 hover:border-red-500/40 hover:text-white"
+                        data-category={cat}
+                        aria-pressed={cat === "All" ? "true" : "false"}
+                    >
+                        <span class="relative z-10">{cat}</span>
+                        <div class="absolute inset-0 rounded-full bg-red-500 scale-0 transition-transform duration-500 ease-out -z-0 group-aria-pressed:scale-100"></div>
+                        <span class="absolute inset-0 rounded-full border border-red-500 opacity-0 group-aria-pressed:opacity-100 transition-opacity"></span>
+                    </button>
+                ))}
+            </div>
+        </div>
 	</div>
-	<div class="flex flex-col gap-24">
-		{projects.map((project) => (
+
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 project-grid min-h-[600px]">
+		{allProjects.map((project) => (
 			<div
-				class="relative w-full p-0 pt-12 text-left bg-transparent border-t vdf-reveal group border-neutral-800"
+				class="project-card group relative flex flex-col h-full bg-[#0d0d0d]/50 border border-white/5 rounded-3xl p-8 hover:bg-[#121212] transition-all duration-700 ease-out vdf-reveal overflow-hidden"
+				data-category={project.parentCategory}
 				style={`--project-color: ${project.color}`}
 			>
-				<div class="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-					<div class="text-left bg-transparent border-none vdf-skew grow">
-						<div class="flex items-center justify-between gap-4 mb-4">
-							<span class="font-mono text-sm text-red-500">
-								{project.id}
-							</span>
-							<a
-								href={project.repo}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="flex items-center gap-3 px-4 py-2 transition-all duration-300 border rounded-full border-white/10 hover:border-white/40 hover:bg-white/5 group/repo"
-								title="View Repository"
-							>
-								<img
-									src="/icons/github.svg"
-									alt="GitHub"
-									class="w-5 h-5 transition-opacity opacity-50 group-hover/repo:opacity-100 invert"
-								/>
-								<span class="font-mono text-xs tracking-widest uppercase text-neutral-500 group-hover/repo:text-white">
-									Repository
-								</span>
-							</a>
-						</div>
-						<a
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="group/title block w-full"
-						>
-							<h3 class="text-5xl font-black tracking-tighter uppercase transition-all duration-500 md:text-8xl group-hover/title:translate-x-4 text-white [-webkit-text-stroke:1px_rgba(255,255,255,0.2)] group-hover/title:[-webkit-text-stroke:0px] group-hover/title:text-[var(--project-color)]">
-								{project.title}
-							</h3>
-						</a>
-						<p class="max-w-xl mt-6 text-lg leading-relaxed text-neutral-400 font-medium">
-							{project.description}
-						</p>
-						<div class="flex flex-wrap gap-2 mt-6">
-							{project.tech.split(" · ").map((t) => (
-								<span class="px-3 py-1 text-[10px] font-mono tracking-widest uppercase border border-white/10 rounded-full text-neutral-500 bg-white/5">
-									{t}
-								</span>
-							))}
-						</div>
-					</div>
-					<div class="text-right vdf-skew shrink-0 md:mb-2">
-						<p class="text-xl font-bold tracking-widest uppercase text-neutral-500 group-hover:text-white transition-colors duration-300">
-							{project.category}
-						</p>
-						<div
-							class="h-[1px] mt-4 transition-all duration-700 ease-out bg-[var(--project-color)] w-0 group-hover:w-full"
-						></div>
-					</div>
-				</div>
-				<div
-					class="absolute inset-0 transition-all duration-700 opacity-0 -z-10 group-hover:opacity-[0.03] bg-[var(--project-color)] blur-3xl rounded-full scale-50 group-hover:scale-110"
-				></div>
+                {/* Background Glow */}
+                <div class="absolute top-0 right-0 w-64 h-64 -mr-32 -mt-32 bg-[var(--project-color)] opacity-0 group-hover:opacity-[0.07] blur-[100px] transition-all duration-1000 rounded-full pointer-events-none"></div>
+                
+                <div class="flex items-start justify-between mb-8">
+                    <div class="flex flex-col">
+                        <span class="font-mono text-sm font-bold text-red-500 mb-1">{project.id}</span>
+                        <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-600 font-bold group-hover:text-neutral-400 transition-colors">
+                            {project.category}
+                        </span>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <a
+                            href={project.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="p-2.5 rounded-full bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group/repo"
+                            title="View Repository"
+                        >
+                            <img
+                                src="/icons/github.svg"
+                                alt="GitHub"
+                                class="w-4 h-4 opacity-50 group-hover/repo:opacity-100 invert transition-opacity"
+                            />
+                        </a>
+                        <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="p-2.5 rounded-full bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group/link"
+                            title="Visit Website"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50 group-hover/link:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <a href={project.url} target="_blank" class="inline-block group/title">
+                        <h3 class="text-3xl md:text-4xl font-black tracking-tighter uppercase transition-all duration-500 group-hover/title:text-[var(--project-color)] leading-none">
+                            {project.title}
+                        </h3>
+                        <div class="h-px w-0 bg-[var(--project-color)] transition-all duration-500 group-hover/title:w-full mt-2"></div>
+                    </a>
+                </div>
+
+                <p class="text-neutral-400 text-sm leading-relaxed mb-10 grow font-medium">
+                    {project.description}
+                </p>
+
+                <div class="mt-auto">
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        {project.tech.split(" · ").map((t) => (
+                            <span class="px-3 py-1 text-[9px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 transition-all duration-500">
+                                {t}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Corner Decoration */}
+                <div class="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-br from-transparent to-white/[0.03] rounded-tl-3xl"></div>
 			</div>
 		))}
 	</div>
 </section>
+
+<script>
+    import gsap from "gsap";
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.getAttribute('data-category');
+            
+            // Update active state
+            filterBtns.forEach(b => {
+                b.setAttribute('aria-pressed', 'false');
+                b.querySelector('span')?.classList.remove('text-white');
+            });
+            btn.setAttribute('aria-pressed', 'true');
+            btn.querySelector('span')?.classList.add('text-white');
+
+            // Animate cards
+            projectCards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                const isVisible = category === 'All' || cardCat === category;
+
+                if (isVisible) {
+                    (card as HTMLElement).style.display = 'flex';
+                    gsap.to(card, {
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power4.out",
+                        clearProps: "all"
+                    });
+                } else {
+                    gsap.to(card, {
+                        opacity: 0,
+                        scale: 0.95,
+                        y: 20,
+                        duration: 0.4,
+                        ease: "power2.in",
+                        onComplete: () => {
+                            (card as HTMLElement).style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    // Initialize the "All" button style
+    document.querySelector('.filter-btn[data-category="All"] span')?.classList.add('text-white');
+</script>
+
+<style>
+    .project-card {
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    .filter-btn[aria-pressed="true"] {
+        color: white;
+    }
+</style>
