@@ -1,4 +1,6 @@
 ---
+import { skills as skillGroups } from "../data/skills";
+
 interface Project {
 	id: string;
 	title: string;
@@ -31,6 +33,19 @@ const allProjects = projectCategories.flatMap(cat =>
 
 const totalProjects = allProjects.length;
 const categories = ["All", ...projectCategories.map(cat => cat.name)];
+
+// Flatten skills for easy lookup
+const skillIcons = skillGroups.flatMap(group => group.items);
+const getSkillIcon = (name: string) => {
+    // Normalize names for better matching (e.g., "Tailwind" -> "Tailwind CSS")
+    const searchName = name.trim().toLowerCase();
+    const skill = skillIcons.find(s => 
+        s.name.toLowerCase() === searchName || 
+        s.name.toLowerCase().includes(searchName) ||
+        searchName.includes(s.name.toLowerCase())
+    );
+    return skill?.icon;
+};
 ---
 
 <section id="vdf-projects" class="px-8 py-32 lg:px-24 scroll-mt-20">
@@ -131,11 +146,21 @@ const categories = ["All", ...projectCategories.map(cat => cat.name)];
 
                 <div class="mt-auto">
                     <div class="flex flex-wrap gap-2 mb-2">
-                        {project.tech.split(" · ").map((t) => (
-                            <span class="px-3 py-1 text-[9px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 transition-all duration-500">
-                                {t}
-                            </span>
-                        ))}
+                        {project.tech.split(" · ").map((t) => {
+                            const icon = getSkillIcon(t);
+                            return (
+                                <span class="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 transition-all duration-500">
+                                    {icon && (
+                                        <img 
+                                            src={icon} 
+                                            alt="" 
+                                            class="w-3 h-3 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                                        />
+                                    )}
+                                    {t}
+                                </span>
+                            );
+                        })}
                     </div>
                 </div>
 
