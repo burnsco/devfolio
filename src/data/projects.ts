@@ -43,7 +43,7 @@ export const projectCategories = [
 				tech: "React 19 · React Router 7 · Vite · Tailwind 4",
 				description:
 					"A high-end luxury e-commerce experience designed with brutalist-inspired dark mode minimalism, tailored for premium fashion.",
-				url: "https://dluxury.coreyburns.ca/",
+				url: "https://dark-luxury.coreyburns.ca",
 				repo: "https://github.com/corey-burns-dev/dark-luxury",
 			},
 			{
@@ -90,13 +90,57 @@ export const projectCategories = [
 				url: "https://hackernews.coreyburns.ca",
 				repo: "https://github.com/corey-burns-dev/hackernews",
 			},
+			{
+				id: "09",
+				title: "beanz",
+				category: "E-commerce",
+				color: "#3C2A21",
+				tech: "Astro 5 · Tailwind 4 · Bun",
+				description:
+					"A high-performance coffee roastery storefront built with Astro 5, featuring zero-JS bundles, optimized WebP images, and a focus on perfect Lighthouse scores.",
+				url: "https://beanz.coreyburns.ca",
+				repo: "https://github.com/corey-burns-dev/beanz",
+			},
+			{
+				id: "10",
+				title: "botanica",
+				category: "E-commerce",
+				color: "#16a34a",
+				tech: "Astro 5 · Tailwind 4 · JavaScript",
+				description:
+					"A high-performance plant storefront demo optimized for top Lighthouse scores, featuring semantic HTML, accessibility best practices, and lightning-fast static delivery.",
+				url: "https://botanica.coreyburns.ca",
+				repo: "https://github.com/corey-burns-dev/botanica",
+			},
+			{
+				id: "11",
+				title: "terra-pulse",
+				category: "NGO & Platform",
+				color: "#4ade80",
+				tech: "Astro 5 · Tailwind 4 · Bun",
+				description:
+					"A regenerative economy platform connecting people with ecosystem restoration projects, featuring impact metrics, fund options, and project exploration.",
+				url: "https://terra-pulse.coreyburns.ca",
+				repo: "https://github.com/corey-burns-dev/terra-pulse",
+			},
+			{
+				id: "12",
+				title: "iron-and-oak",
+				category: "Construction",
+				color: "#B87333",
+				tech: "Astro 5 · TypeScript · Vanilla CSS",
+				description:
+					"Premium construction and structural engineering showcase featuring high-spec residential and commercial projects with a focus on durability and technical excellence.",
+				url: "https://iron-oak.coreyburns.ca",
+				repo: "https://github.com/corey-burns-dev/iron-and-oak",
+			},
 		],
 	},
 	{
 		name: "Games & Interactive",
 		projects: [
 			{
-				id: "09",
+				id: "13",
 				title: "games-hub",
 				category: "Arcade Platform",
 				color: "#ef4444",
@@ -107,7 +151,7 @@ export const projectCategories = [
 				repo: "https://github.com/corey-burns-dev/games-hub",
 			},
 			{
-				id: "10",
+				id: "14",
 				title: "blackjack",
 				category: "Card Game",
 				color: "#ef4444",
@@ -118,7 +162,7 @@ export const projectCategories = [
 				repo: "https://github.com/corey-burns-dev/blackjack",
 			},
 			{
-				id: "11",
+				id: "15",
 				title: "poker",
 				category: "Real-time Game",
 				color: "#10b981",
@@ -129,7 +173,18 @@ export const projectCategories = [
 				repo: "https://github.com/corey-burns-dev/poker",
 			},
 			{
-				id: "12",
+				id: "16",
+				title: "chess",
+				category: "Strategy Game",
+				color: "#c4893c",
+				tech: "React 19 · TypeScript · Vite · Stockfish",
+				description:
+					"A complete browser chess engine and UI built with React 19, featuring full rule enforcement (castling, en passant, draws), and a Stockfish-powered AI opponent.",
+				url: "https://chess.coreyburns.ca",
+				repo: "https://github.com/corey-burns-dev/chess",
+			},
+			{
+				id: "17",
 				title: "space-maze",
 				category: "3D Exploration",
 				color: "#3b82f6",
@@ -145,7 +200,7 @@ export const projectCategories = [
 		name: "Creative & Experimental",
 		projects: [
 			{
-				id: "13",
+				id: "18",
 				title: "fractal-lab",
 				category: "Creative Coding",
 				color: "#8b5cf6",
@@ -156,18 +211,18 @@ export const projectCategories = [
 				repo: "https://github.com/corey-burns-dev/fractal-lab",
 			},
 			{
-				id: "14",
+				id: "19",
 				title: "nca-lab",
 				category: "Generative Art",
 				color: "#f59e0b",
 				tech: "WebGL2 · GLSL · TypeScript · Vite",
 				description:
 					"Interactive Neural Cellular Automata (NCA) 'living' texture generator using WebGL2 shaders to create complex, evolving organic patterns.",
-				url: "https://nca.coreyburns.ca",
+				url: "https://neural-automata.coreyburns.ca",
 				repo: "https://github.com/corey-burns-dev/neural-cellular-automata",
 			},
 			{
-				id: "15",
+				id: "20",
 				title: "dream-transmission",
 				category: "Ambient Experience",
 				color: "#a855f7",
@@ -178,7 +233,7 @@ export const projectCategories = [
 				repo: "https://github.com/corey-burns-dev/dream-transmission",
 			},
 			{
-				id: "16",
+				id: "21",
 				title: "wake-transmission",
 				category: "Audio-Reactive Visualizer",
 				color: "#06b6d4",
@@ -194,7 +249,7 @@ export const projectCategories = [
 		name: "Utilities & Tools",
 		projects: [
 			{
-				id: "17",
+				id: "22",
 				title: "image-mage",
 				category: "Media Tooling",
 				color: "#f59e0b",
@@ -205,7 +260,7 @@ export const projectCategories = [
 				repo: "https://github.com/corey-burns-dev/image-mage",
 			},
 			{
-				id: "18",
+				id: "23",
 				title: "tools-hub",
 				category: "Developer Utilities",
 				color: "#22c55e",
