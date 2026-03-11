@@ -87,17 +87,15 @@ const NAV_ITEMS = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<!-- JSON-LD Structured Data -->
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "Person",
-				"name": "Corey Burns",
-				"url": "https://coreyburns.ca",
-				"jobTitle": "Full-Stack Developer",
-				"sameAs": ["https://github.com/corey-burns-dev"],
-				"description": "Full-stack developer building technically solid and visually refined software, specializing in Next.js, TanStack, Astro, Tailwind, and TypeScript."
-			}
-		</script>
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Corey Burns",
+			"url": "https://coreyburns.ca",
+			"jobTitle": "Full-Stack Developer",
+			"sameAs": ["https://github.com/corey-burns-dev"],
+			"description": "Full-stack developer building technically solid and visually refined software, specializing in Next.js, TanStack, Astro, Tailwind, and TypeScript."
+		})}></script>
 	</head>
 	<body class="min-h-screen overflow-x-hidden text-white bg-[#0a0a0a] selection:bg-red-500/30 font-sans">
 		<div class="noise"></div>

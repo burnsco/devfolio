@@ -15,12 +15,12 @@ A high-performance, cinematic developer portfolio featuring smooth scroll-driven
 
 This portfolio is engineered for speed. By migrating from a heavy client-side React architecture to **Astro-native components**, we achieved a perfect score across all Lighthouse metrics.
 
-| Metric | Score |
-| :--- | :--- |
-| 🚀 **Performance** | **100** |
-| ♿ **Accessibility** | **100** |
+| Metric                | Score   |
+| :-------------------- | :------ |
+| 🚀 **Performance**    | **100** |
+| ♿ **Accessibility**  | **100** |
 | 🛡️ **Best Practices** | **100** |
-| 🔍 **SEO** | **100** |
+| 🔍 **SEO**            | **100** |
 
 ---
 
