@@ -43,7 +43,6 @@ export const projectCategories = [
       {
         id: "03",
         title: "eco-vibe",
-
         category: "E-commerce",
         color: "#16a34a",
         tech: "React 19 · React Router 7 · Vite · Tailwind 3 · Bun",
@@ -53,7 +52,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/eco-vibe",
       },
       {
-        id: "03",
+        id: "04",
         title: "dark-luxury",
         category: "E-commerce",
         color: "#737373",
@@ -64,7 +63,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/dark-luxury",
       },
       {
-        id: "04",
+        id: "05",
         title: "halo-training",
         category: "E-commerce",
         color: "#0ea5e9",
@@ -75,7 +74,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/halo-training",
       },
       {
-        id: "05",
+        id: "06",
         title: "ember-kitchen",
         category: "E-commerce",
         color: "#ef4444",
@@ -86,7 +85,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/ember-kitchen",
       },
       {
-        id: "06",
+        id: "07",
         title: "earthco-market",
         category: "E-commerce",
         color: "#16a34a",
@@ -97,7 +96,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/earthco-market",
       },
       {
-        id: "07",
+        id: "08",
         title: "hackernews",
         category: "News Client",
         color: "#fb923c",
@@ -108,7 +107,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/hackernews",
       },
       {
-        id: "08",
+        id: "09",
         title: "beanz",
         category: "E-commerce",
         color: "#3C2A21",
@@ -119,7 +118,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/beanz",
       },
       {
-        id: "09",
+        id: "10",
         title: "botanica",
         category: "E-commerce",
         color: "#16a34a",
@@ -130,7 +129,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/botanica",
       },
       {
-        id: "10",
+        id: "11",
         title: "terra-pulse",
         category: "NGO & Platform",
         color: "#4ade80",
@@ -141,7 +140,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/terra-pulse",
       },
       {
-        id: "11",
+        id: "12",
         title: "iron-and-oak",
         category: "Construction",
         color: "#B87333",
@@ -157,7 +156,7 @@ export const projectCategories = [
     name: "Games & Interactive",
     projects: [
       {
-        id: "12",
+        id: "13",
         title: "games-hub",
         category: "Arcade Platform",
         color: "#ef4444",
@@ -168,7 +167,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/games-hub",
       },
       {
-        id: "13",
+        id: "14",
         title: "blackjack",
         category: "Card Game",
         color: "#ef4444",
@@ -179,7 +178,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/blackjack",
       },
       {
-        id: "14",
+        id: "15",
         title: "chess",
         category: "Strategy Game",
         color: "#c4893c",
@@ -190,7 +189,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/chess",
       },
       {
-        id: "15",
+        id: "16",
         title: "space-maze",
         category: "3D Exploration",
         color: "#3b82f6",
@@ -206,7 +205,7 @@ export const projectCategories = [
     name: "Creative & Experimental",
     projects: [
       {
-        id: "16",
+        id: "17",
         title: "fractal-lab",
         category: "Creative Coding",
         color: "#8b5cf6",
@@ -217,7 +216,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/fractal-lab",
       },
       {
-        id: "17",
+        id: "18",
         title: "neural-automata",
         category: "Generative Art",
         color: "#f59e0b",
@@ -228,7 +227,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/neural-cellular-automata",
       },
       {
-        id: "18",
+        id: "19",
         title: "dream-transmission",
         category: "Ambient Experience",
         color: "#a855f7",
@@ -239,7 +238,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/dream-transmission",
       },
       {
-        id: "19",
+        id: "20",
         title: "wake-transmission",
         category: "Audio-Reactive Visualizer",
         color: "#06b6d4",
@@ -255,7 +254,7 @@ export const projectCategories = [
     name: "Utilities & Tools",
     projects: [
       {
-        id: "20",
+        id: "21",
         title: "image-mage",
         category: "Media Tooling",
         color: "#f59e0b",
@@ -266,7 +265,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/image-mage",
       },
       {
-        id: "21",
+        id: "22",
         title: "tools-hub",
         category: "Developer Utilities",
         color: "#22c55e",
@@ -277,7 +276,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/tools-hub",
       },
       {
-        id: "22",
+        id: "23",
         title: "koda",
         category: "Social & Streaming",
         color: "#8b5cf6",
@@ -288,7 +287,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/koda",
       },
       {
-        id: "23",
+        id: "24",
         title: "poker",
         category: "Real-time Game",
         color: "#10b981",
