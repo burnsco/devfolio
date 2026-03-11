@@ -114,7 +114,7 @@ export const projectCategories = [
         tech: "Astro 5 · Tailwind 4 · Bun",
         description:
           "A high-performance coffee roastery storefront built with Astro 5, featuring zero-JS bundles, optimized WebP images, and a focus on perfect Lighthouse scores.",
-        url: "https://beanz.coreyburns.ca",
+        url: "https://beans.coreyburns.ca",
         repo: "https://github.com/corey-burns-dev/beanz",
       },
       {
