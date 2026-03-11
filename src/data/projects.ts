@@ -4,6 +4,17 @@ export const projectCategories = [
     projects: [
       {
         id: "00",
+        title: "agents",
+        category: "AI Coding Tool",
+        color: "#3b82f6",
+        tech: "Bun · React · Go · SQLite · Effect · Tauri · Qt6 · Docker",
+        description:
+          "A minimal web GUI and desktop application for coding agents with first-class support for Gemini and Claude, featuring native Linux Qt6 and Tauri builds.",
+        url: "#",
+        repo: "https://github.com/corey-burns-dev/agents",
+      },
+      {
+        id: "01",
         title: "plum",
         category: "Media Server",
         color: "#a855f7",
@@ -19,7 +30,7 @@ export const projectCategories = [
     name: "E-commerce & Platforms",
     projects: [
       {
-        id: "01",
+        id: "02",
         title: "sanctum",
         category: "Social Platform",
         color: "#3b82f6",
@@ -30,8 +41,9 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/sanctum",
       },
       {
-        id: "02",
+        id: "03",
         title: "eco-vibe",
+
         category: "E-commerce",
         color: "#16a34a",
         tech: "React 19 · React Router 7 · Vite · Tailwind 3 · Bun",
