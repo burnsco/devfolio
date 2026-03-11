@@ -157,28 +157,6 @@ export const projectCategories = [
     projects: [
       {
         id: "13",
-        title: "games-hub",
-        category: "Arcade Platform",
-        color: "#ef4444",
-        tech: "Next.js 16 · React 19 · TypeScript · Tailwind CSS",
-        description:
-          "Browser arcade featuring 13 instant-play games including Snake, Pong, Flappy Jump, and 2048, with a single polished hub UI.",
-        url: "https://games.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/games-hub",
-      },
-      {
-        id: "14",
-        title: "blackjack",
-        category: "Card Game",
-        color: "#ef4444",
-        tech: "Astro 5 · React 19 · Tailwind 4 · Lucide",
-        description:
-          "A modern, fast, and visually appealing Blackjack game with casino-grade logic, natural payouts, and smooth animations.",
-        url: "https://blackjack.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/blackjack",
-      },
-      {
-        id: "15",
         title: "chess",
         category: "Strategy Game",
         color: "#c4893c",
@@ -189,7 +167,40 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/chess",
       },
       {
+        id: "14",
+        title: "games-hub",
+        category: "Arcade Platform",
+        color: "#ef4444",
+        tech: "Next.js 16 · React 19 · TypeScript · Tailwind CSS",
+        description:
+          "Browser arcade featuring 13 instant-play games including Snake, Pong, Flappy Jump, and 2048, with a single polished hub UI.",
+        url: "https://games.coreyburns.ca",
+        repo: "https://github.com/corey-burns-dev/games-hub",
+      },
+      {
+        id: "15",
+        title: "blackjack",
+        category: "Card Game",
+        color: "#ef4444",
+        tech: "Astro 5 · React 19 · Tailwind 4 · Lucide",
+        description:
+          "A modern, fast, and visually appealing Blackjack game with casino-grade logic, natural payouts, and smooth animations.",
+        url: "https://blackjack.coreyburns.ca",
+        repo: "https://github.com/corey-burns-dev/blackjack",
+      },
+      {
         id: "16",
+        title: "poker",
+        category: "Real-time Game",
+        color: "#10b981",
+        tech: "Elixir · Phoenix · React 19 · Vite · WebSockets",
+        description:
+          "Real-time online poker platform featuring a Phoenix-powered backend for table state and a sleek React frontend for immersive gameplay. [Under Construction]",
+        url: "https://poker.coreyburns.ca",
+        repo: "https://github.com/corey-burns-dev/poker",
+      },
+      {
+        id: "17",
         title: "space-maze",
         category: "3D Exploration",
         color: "#3b82f6",
@@ -205,7 +216,7 @@ export const projectCategories = [
     name: "Creative & Experimental",
     projects: [
       {
-        id: "17",
+        id: "18",
         title: "fractal-lab",
         category: "Creative Coding",
         color: "#8b5cf6",
@@ -216,7 +227,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/fractal-lab",
       },
       {
-        id: "18",
+        id: "19",
         title: "neural-automata",
         category: "Generative Art",
         color: "#f59e0b",
@@ -227,7 +238,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/neural-cellular-automata",
       },
       {
-        id: "19",
+        id: "20",
         title: "dream-transmission",
         category: "Ambient Experience",
         color: "#a855f7",
@@ -238,7 +249,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/dream-transmission",
       },
       {
-        id: "20",
+        id: "21",
         title: "wake-transmission",
         category: "Audio-Reactive Visualizer",
         color: "#06b6d4",
@@ -254,7 +265,7 @@ export const projectCategories = [
     name: "Utilities & Tools",
     projects: [
       {
-        id: "21",
+        id: "22",
         title: "image-mage",
         category: "Media Tooling",
         color: "#f59e0b",
@@ -265,7 +276,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/image-mage",
       },
       {
-        id: "22",
+        id: "23",
         title: "tools-hub",
         category: "Developer Utilities",
         color: "#22c55e",
@@ -276,7 +287,7 @@ export const projectCategories = [
         repo: "https://github.com/corey-burns-dev/tools-hub",
       },
       {
-        id: "23",
+        id: "24",
         title: "koda",
         category: "Social & Streaming",
         color: "#8b5cf6",
@@ -285,17 +296,6 @@ export const projectCategories = [
           "Full-stack Twitch/Discord-style app with a high-performance Zig backend and Next.js frontend, supporting real-time chat and HLS streaming. [Under Construction]",
         url: "https://koda.coreyburns.ca",
         repo: "https://github.com/corey-burns-dev/koda",
-      },
-      {
-        id: "24",
-        title: "poker",
-        category: "Real-time Game",
-        color: "#10b981",
-        tech: "Elixir · Phoenix · React 19 · Vite · WebSockets",
-        description:
-          "Real-time online poker platform featuring a Phoenix-powered backend for table state and a sleek React frontend for immersive gameplay. [Under Construction]",
-        url: "https://poker.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/poker",
       },
     ],
   },
