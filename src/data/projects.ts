@@ -7,7 +7,7 @@ export const projectCategories = [
         title: "agents",
         category: "AI Coding Tool",
         color: "#3b82f6",
-        tech: "Bun · React · Go · SQLite · Effect · Tauri · Qt6 · Docker",
+        tech: "React · Go · SQLite · Effect · Tauri · Qt6 · Docker",
         description:
           "A minimal web GUI and desktop application for coding agents with first-class support for Codex Gemini and Claude, featuring native Linux Qt6, Tauri, and Electron builds.",
         url: "#",
@@ -18,7 +18,7 @@ export const projectCategories = [
         title: "plum",
         category: "Media Server",
         color: "#a855f7",
-        tech: "Go · SQLite · React · TypeScript · Vite · Effect · Bun · Docker",
+        tech: "Go · SQLite · React · TypeScript · Vite · Effect · Docker",
         description:
           "Lightweight, experimental media server and player suite inspired by platforms like Plex and Jellyfin, featuring a high-performance Go backend and a modern React frontend.",
         url: "#",
@@ -45,7 +45,7 @@ export const projectCategories = [
         title: "eco-vibe",
         category: "E-commerce",
         color: "#16a34a",
-        tech: "React 19 · React Router 7 · Vite · Tailwind 3 · Bun",
+        tech: "React 19 · React Router 7 · Vite · Tailwind 3",
         description:
           "Sustainable and eco-friendly catalog storefront focusing on conscious consumer goods, blazing-fast cart flow, and elegant product display.",
         url: "https://eco-vibe.coreyburns.ca/",
@@ -67,7 +67,7 @@ export const projectCategories = [
         title: "halo-training",
         category: "E-commerce",
         color: "#0ea5e9",
-        tech: "React 19 · React Router 7 · Vite · Tailwind 4 · Biome",
+        tech: "React 19 · React Router 7 · Vite · Tailwind 4",
         description:
           "A modern apparel and training gear storefront with robust filtering, product catalogs, and optimized performance.",
         url: "https://halo-training.coreyburns.ca/",
@@ -78,7 +78,7 @@ export const projectCategories = [
         title: "ember-kitchen",
         category: "E-commerce",
         color: "#ef4444",
-        tech: "React 19 · React Router 7 · Vite · Tailwind 4 · Biome",
+        tech: "React 19 · React Router 7 · Vite · Tailwind 4",
         description:
           "A sleek, high-conversion e-commerce storefront showcasing premium kitchenware with dynamic routing and cart management.",
         url: "https://ember-kitchen.coreyburns.ca/",
@@ -111,7 +111,7 @@ export const projectCategories = [
         title: "beanz",
         category: "E-commerce",
         color: "#3C2A21",
-        tech: "Astro 5 · Tailwind 4 · Bun",
+        tech: "Astro 5 · Tailwind 4",
         description:
           "A high-performance coffee roastery storefront built with Astro 5, featuring zero-JS bundles, optimized WebP images, and a focus on perfect Lighthouse scores.",
         url: "https://beanz.coreyburns.ca",
@@ -133,7 +133,7 @@ export const projectCategories = [
         title: "terra-pulse",
         category: "NGO & Platform",
         color: "#4ade80",
-        tech: "Astro 5 · Tailwind 4 · Bun",
+        tech: "Astro 5 · Tailwind 4",
         description:
           "A regenerative economy platform connecting people with ecosystem restoration projects, featuring impact metrics, fund options, and project exploration.",
         url: "https://terra.coreyburns.ca",
