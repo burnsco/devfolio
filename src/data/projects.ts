@@ -9,7 +9,7 @@ export const projectCategories = [
         color: "#3b82f6",
         tech: "Bun · React · Go · SQLite · Effect · Tauri · Qt6 · Docker",
         description:
-          "A minimal web GUI and desktop application for coding agents with first-class support for Gemini and Claude, featuring native Linux Qt6 and Tauri builds.",
+          "A minimal web GUI and desktop application for coding agents with first-class support for Codex Gemini and Claude, featuring native Linux Qt6, Tauri, and Electron builds.",
         url: "#",
         repo: "https://github.com/corey-burns-dev/agents",
       },
@@ -114,7 +114,7 @@ export const projectCategories = [
         tech: "Astro 5 · Tailwind 4 · Bun",
         description:
           "A high-performance coffee roastery storefront built with Astro 5, featuring zero-JS bundles, optimized WebP images, and a focus on perfect Lighthouse scores.",
-        url: "https://beans.coreyburns.ca",
+        url: "https://beanz.coreyburns.ca",
         repo: "https://github.com/corey-burns-dev/beanz",
       },
       {
@@ -136,7 +136,7 @@ export const projectCategories = [
         tech: "Astro 5 · Tailwind 4 · Bun",
         description:
           "A regenerative economy platform connecting people with ecosystem restoration projects, featuring impact metrics, fund options, and project exploration.",
-        url: "https://terra-pulse.coreyburns.ca",
+        url: "https://terra.coreyburns.ca",
         repo: "https://github.com/corey-burns-dev/terra-pulse",
       },
       {

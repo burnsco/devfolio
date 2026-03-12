@@ -52,13 +52,31 @@ const totalProjects = allProjects.length;
 // Flatten skills for easy lookup
 const skillIcons = skillGroups.flatMap(group => group.items);
 const getSkillIcon = (name: string) => {
-    // Normalize names for better matching
     const searchName = name.trim().toLowerCase();
-    const skill = skillIcons.find(s => 
-        s.name.toLowerCase() === searchName || 
-        s.name.toLowerCase().includes(searchName) ||
-        searchName.includes(s.name.toLowerCase())
-    );
+    
+    // 1. Try exact match first (case-insensitive)
+    let skill = skillIcons.find(s => s.name.toLowerCase() === searchName);
+    if (skill) return skill.icon;
+
+    // 2. Try matching without version numbers (e.g., "React 19" -> "React")
+    const nameWithoutVersion = searchName.replace(/\s\d+.*$/, '').trim();
+    skill = skillIcons.find(s => s.name.toLowerCase() === nameWithoutVersion);
+    if (skill) return skill.icon;
+
+    // 3. Try to find the longest matching skill name contained in the search string
+    // This handles "React Router" matching "React Router" instead of just "React"
+    // Sort by length descending to get the most specific match first
+    const sortedSkills = [...skillIcons].sort((a, b) => b.name.length - a.name.length);
+    skill = sortedSkills.find(s => {
+        const skillName = s.name.toLowerCase();
+        // Avoid matching very short names like "Go" inside other words unless it's a standalone word
+        if (skillName.length <= 3) {
+            const regex = new RegExp(`\\b${skillName}\\b`, 'i');
+            return regex.test(searchName);
+        }
+        return searchName.includes(skillName);
+    });
+    
     return skill?.icon;
 };
 ---
