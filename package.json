@@ -20,6 +20,9 @@
     "@astrojs/sitemap": "^3.7.1",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/space-grotesk": "^5.2.10",
+    "@iconify-json/lucide": "^1.2.96",
+    "@iconify-json/simple-icons": "^1.2.73",
+    "astro-icon": "^1.1.5",
     "gsap": "^3.14.2"
   },
   "devDependencies": {

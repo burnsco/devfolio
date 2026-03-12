@@ -144,7 +144,7 @@ export const projectCategories = [
         title: "iron-and-oak",
         category: "Construction",
         color: "#B87333",
-        tech: "Astro 5 · TypeScript · Vanilla CSS",
+        tech: "Astro 5 · TypeScript",
         description:
           "Premium construction and structural engineering showcase featuring high-spec residential and commercial projects with a focus on durability and technical excellence.",
         url: "https://iron-oak.coreyburns.ca",

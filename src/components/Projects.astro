@@ -1,5 +1,6 @@
 ---
 import { skills as skillGroups } from "../data/skills";
+import { Icon } from "astro-icon/components";
 
 interface Project {
 	id: string;
@@ -184,9 +185,8 @@ const getSkillIcon = (name: string) => {
                             return (
                                 <span class="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 group-[.is-active]:border-white/10 group-[.is-active]:text-neutral-300 transition-all duration-500">
                                     {icon && (
-                                        <img 
-                                            src={icon} 
-                                            alt="" 
+                                        <Icon 
+                                            name={icon} 
                                             class="w-3 h-3 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-[.is-active]:grayscale-0 group-[.is-active]:opacity-100 transition-all duration-500"
                                         />
                                     )}
