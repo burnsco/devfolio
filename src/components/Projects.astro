@@ -67,7 +67,7 @@ const getSkillIcon = (name: string) => {
     // 3. Try to find the longest matching skill name contained in the search string
     // This handles "React Router" matching "React Router" instead of just "React"
     // Sort by length descending to get the most specific match first
-    const sortedSkills = [...skillIcons].sort((a, b) => b.name.length - a.name.length);
+    const sortedSkills = [...skillIcons].toSorted((a, b) => b.name.length - a.name.length);
     skill = sortedSkills.find(s => {
         const skillName = s.name.toLowerCase();
         // Avoid matching very short names like "Go" inside other words unless it's a standalone word
