@@ -3,7 +3,6 @@ export const skills = [
     category: "Frontend",
     items: [
       { name: "HTML", icon: "simple-icons:html5" },
-      { name: "CSS", icon: "simple-icons:css3" },
       { name: "JavaScript", icon: "simple-icons:javascript" },
       { name: "TypeScript", icon: "simple-icons:typescript" },
       { name: "React", icon: "simple-icons:react" },
@@ -13,7 +12,7 @@ export const skills = [
       { name: "Remix", icon: "simple-icons:remix" },
       { name: "Vue.js", icon: "simple-icons:vuedotjs" },
       { name: "Redux", icon: "simple-icons:redux" },
-      { name: "Tailwind CSS", icon: "simple-icons:tailwindcss" },
+      { name: "Tailwind", icon: "simple-icons:tailwindcss" },
       { name: "Sass", icon: "simple-icons:sass" },
       { name: "Material UI", icon: "simple-icons:mui" },
       { name: "Three.js", icon: "simple-icons:threedotjs" },
@@ -25,8 +24,6 @@ export const skills = [
       { name: "GLSL", icon: "simple-icons:opengl" },
       { name: "WebGL2", icon: "simple-icons:webgl" },
       { name: "Raymarching", icon: "simple-icons:opengl" },
-      { name: "Tone.js", icon: "lucide:audio-lines" },
-      { name: "Web Audio", icon: "lucide:audio-waveform" },
     ],
   },
   {
@@ -55,7 +52,6 @@ export const skills = [
       { name: "Nginx", icon: "simple-icons:nginx" },
       { name: "Zig", icon: "simple-icons:zig" },
       { name: "Sharp", icon: "simple-icons:sharp" },
-      { name: "Stockfish", icon: "lucide:cpu" },
       { name: "Effect", icon: "simple-icons:effect" },
       { name: "Tauri", icon: "simple-icons:tauri" },
       { name: "Qt6", icon: "simple-icons:qt" },
