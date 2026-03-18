@@ -6,17 +6,19 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "deploy": "scripts/deploy-pages.sh",
+    "deploy": "npm run build && wrangler deploy",
     "deploy:prod": "scripts/deploy-pages.sh main",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "lint": "oxlint",
     "format": "oxfmt",
     "prepare": "husky",
     "lint:fix": "oxlint --fix . && oxfmt",
-    "check": "astro check"
+    "check": "astro check",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.1.2",
     "@astrojs/sitemap": "^3.7.1",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/space-grotesk": "^5.2.10",
@@ -37,7 +39,7 @@
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
-    "wrangler": "^4.74.0"
+    "wrangler": "^4.75.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
