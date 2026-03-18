@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "deploy": "scripts/deploy-pages.sh",
-    "deploy:prod": "scripts/deploy-pages.sh main",
+    "deploy": "bun run build && npx wrangler deploy",
+    "deploy:dry-run": "npx wrangler deploy --dry-run",
+    "cf:status": "../scripts/cf-portfolio.sh status devfolio",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "oxlint",

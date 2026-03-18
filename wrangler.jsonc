@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "devfolio",
+  "compatibility_date": "2026-03-18",
+  "assets": {
+    "directory": "./dist"
+  },
+  "routes": [
+    {
+      "pattern": "www.coreyburns.ca",
+      "custom_domain": true
+    }
+  ]
+}
