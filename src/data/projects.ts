@@ -11,7 +11,7 @@ export const projectCategories = [
         description:
           "A minimal web GUI and desktop application for coding agents with first-class support for Codex Gemini and Claude, featuring native Linux Qt6, Tauri, and Electron builds.",
         url: "#",
-        repo: "https://github.com/corey-burns-dev/agents",
+        repo: "https://github.com/burnsco/agents",
       },
       {
         id: "01",
@@ -22,7 +22,7 @@ export const projectCategories = [
         description:
           "Lightweight, experimental media server and player suite inspired by platforms like Plex and Jellyfin, featuring a high-performance Go backend and a modern React frontend.",
         url: "#",
-        repo: "https://github.com/corey-burns-dev/plum",
+        repo: "https://github.com/burnsco/plum",
       },
     ],
   },
@@ -38,7 +38,7 @@ export const projectCategories = [
         description:
           "Reddit-style community app focused on creativity and shared interests, without politics, religion, or news-driven content.",
         url: "https://sanctum.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/sanctum",
+        repo: "https://github.com/burnsco/sanctum",
       },
       {
         id: "03",
@@ -49,7 +49,7 @@ export const projectCategories = [
         description:
           "Sustainable and eco-friendly catalog storefront focusing on conscious consumer goods, blazing-fast cart flow, and elegant product display.",
         url: "https://eco-vibe.coreyburns.ca/",
-        repo: "https://github.com/corey-burns-dev/eco-vibe",
+        repo: "https://github.com/burnsco/eco-vibe",
       },
       {
         id: "04",
@@ -60,7 +60,7 @@ export const projectCategories = [
         description:
           "A high-end luxury e-commerce experience designed with brutalist-inspired dark mode minimalism, tailored for premium fashion.",
         url: "https://dark-luxury.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/dark-luxury",
+        repo: "https://github.com/burnsco/dark-luxury",
       },
       {
         id: "05",
@@ -71,7 +71,7 @@ export const projectCategories = [
         description:
           "A modern apparel and training gear storefront with robust filtering, product catalogs, and optimized performance.",
         url: "https://halo-training.coreyburns.ca/",
-        repo: "https://github.com/corey-burns-dev/halo-training",
+        repo: "https://github.com/burnsco/halo-training",
       },
       {
         id: "06",
@@ -82,7 +82,7 @@ export const projectCategories = [
         description:
           "A sleek, high-conversion e-commerce storefront showcasing premium kitchenware with dynamic routing and cart management.",
         url: "https://ember-kitchen.coreyburns.ca/",
-        repo: "https://github.com/corey-burns-dev/ember-kitchen",
+        repo: "https://github.com/burnsco/ember-kitchen",
       },
       {
         id: "07",
@@ -93,7 +93,7 @@ export const projectCategories = [
         description:
           "A full-stack e-commerce demo site with a raw brutalist aesthetic, featuring product management, cart flow, and Stripe payments.",
         url: "https://earthco.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/earthco-market",
+        repo: "https://github.com/burnsco/earthco-market",
       },
       {
         id: "08",
@@ -104,7 +104,7 @@ export const projectCategories = [
         description:
           "A cleaner, more visual Hacker News reader that fetches live stories and comments from the official API.",
         url: "https://hackernews.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/hackernews",
+        repo: "https://github.com/burnsco/hackernews",
       },
       {
         id: "09",
@@ -115,7 +115,7 @@ export const projectCategories = [
         description:
           "A high-performance coffee roastery storefront built with Astro 5, featuring zero-JS bundles, optimized WebP images, and a focus on perfect Lighthouse scores.",
         url: "https://beanz.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/beanz",
+        repo: "https://github.com/burnsco/beanz",
       },
       {
         id: "10",
@@ -126,7 +126,7 @@ export const projectCategories = [
         description:
           "A high-performance plant storefront demo optimized for top Lighthouse scores, featuring semantic HTML, accessibility best practices, and lightning-fast static delivery.",
         url: "https://botanica.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/botanica",
+        repo: "https://github.com/burnsco/botanica",
       },
       {
         id: "11",
@@ -137,7 +137,7 @@ export const projectCategories = [
         description:
           "A regenerative economy platform connecting people with ecosystem restoration projects, featuring impact metrics, fund options, and project exploration.",
         url: "https://terra.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/terra-pulse",
+        repo: "https://github.com/burnsco/terra-pulse",
       },
       {
         id: "12",
@@ -148,7 +148,7 @@ export const projectCategories = [
         description:
           "Premium construction and structural engineering showcase featuring high-spec residential and commercial projects with a focus on durability and technical excellence.",
         url: "https://iron-oak.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/iron-and-oak",
+        repo: "https://github.com/burnsco/iron-and-oak",
       },
     ],
   },
@@ -164,7 +164,7 @@ export const projectCategories = [
         description:
           "A complete browser chess engine and UI built with React 19, featuring full rule enforcement (castling, en passant, draws), and a Stockfish-powered AI opponent.",
         url: "https://chess.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/chess",
+        repo: "https://github.com/burnsco/chess",
       },
       {
         id: "14",
@@ -175,7 +175,7 @@ export const projectCategories = [
         description:
           "Browser arcade featuring 13 instant-play games including Snake, Pong, Flappy Jump, and 2048, with a single polished hub UI.",
         url: "https://games.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/games-hub",
+        repo: "https://github.com/burnsco/games-hub",
       },
       {
         id: "15",
@@ -186,7 +186,7 @@ export const projectCategories = [
         description:
           "A modern, fast, and visually appealing Blackjack game with casino-grade logic, natural payouts, and smooth animations.",
         url: "https://blackjack.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/blackjack",
+        repo: "https://github.com/burnsco/blackjack",
       },
       {
         id: "16",
@@ -197,7 +197,7 @@ export const projectCategories = [
         description:
           "Real-time online poker platform featuring a Phoenix-powered backend for table state and a sleek React frontend for immersive gameplay. [Under Construction]",
         url: "https://poker.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/poker",
+        repo: "https://github.com/burnsco/poker",
       },
       {
         id: "17",
@@ -208,7 +208,7 @@ export const projectCategories = [
         description:
           "An immersive 3D space maze explorer built with Three.js and Astro, featuring procedurally generated environments and smooth navigation.",
         url: "https://space-maze.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/space-maze",
+        repo: "https://github.com/burnsco/space-maze",
       },
     ],
   },
@@ -224,7 +224,7 @@ export const projectCategories = [
         description:
           "Realtime fractal art playground featuring 11 3D fractal modes, ray-marched shaders, and dynamic post-processing.",
         url: "https://fractals.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/fractal-lab",
+        repo: "https://github.com/burnsco/fractal-lab",
       },
       {
         id: "19",
@@ -235,7 +235,7 @@ export const projectCategories = [
         description:
           "Interactive Neural Cellular Automata (NCA) 'living' texture generator using WebGL2 shaders to create complex, evolving organic patterns.",
         url: "https://neural-automata.coreyburns.ca/",
-        repo: "https://github.com/corey-burns-dev/neural-cellular-automata",
+        repo: "https://github.com/burnsco/neural-cellular-automata",
       },
       {
         id: "20",
@@ -246,7 +246,7 @@ export const projectCategories = [
         description:
           "Meditative music experience with live shader-driven sky visuals, ambient themes, and an immersive reactive player.",
         url: "https://dreaming.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/dream-transmission",
+        repo: "https://github.com/burnsco/dream-transmission",
       },
       {
         id: "21",
@@ -257,7 +257,7 @@ export const projectCategories = [
         description:
           "Realtime visualizer with frequency-band analysis, cinematic post-processing, theme system, and monitor-style HUD overlays.",
         url: "https://waking.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/wake-transmission",
+        repo: "https://github.com/burnsco/wake-transmission",
       },
     ],
   },
@@ -273,7 +273,7 @@ export const projectCategories = [
         description:
           "Image conversion and compression tool with batch uploads, quality presets, target-size tuning, and ZIP export workflows.",
         url: "https://image-mage.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/image-mage",
+        repo: "https://github.com/burnsco/image-mage",
       },
       {
         id: "23",
@@ -284,7 +284,7 @@ export const projectCategories = [
         description:
           "Suite of practical dev tools (JSON, regex, generators, converters, and more) packaged in a fast, clean Astro app.",
         url: "https://tools.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/tools-hub",
+        repo: "https://github.com/burnsco/tools-hub",
       },
       {
         id: "24",
@@ -295,7 +295,7 @@ export const projectCategories = [
         description:
           "Full-stack Twitch/Discord-style app with a high-performance Zig backend and Next.js frontend, supporting real-time chat and HLS streaming. [Under Construction]",
         url: "https://koda.coreyburns.ca",
-        repo: "https://github.com/corey-burns-dev/koda",
+        repo: "https://github.com/burnsco/koda",
       },
     ],
   },
