@@ -49,6 +49,10 @@ if (projectCategories && Array.isArray(projectCategories)) {
 }
 
 const totalProjects = allProjects.length;
+const hasLiveUrl = (url: string) => {
+    const value = url.trim();
+    return value.length > 0 && value !== "#";
+};
 
 // Flatten skills for easy lookup
 const skillIcons = skillGroups.flatMap(group => group.items);
@@ -106,6 +110,7 @@ const getSkillIcon = (name: string) => {
             <div class="flex flex-wrap gap-2">
                 {categories.map((cat) => (
                     <button
+                        type="button"
                         class="filter-btn group relative px-5 py-2.5 rounded-full border border-neutral-800 text-neutral-500 font-mono text-[10px] uppercase tracking-widest transition-all duration-500 hover:border-red-500/40 hover:text-white"
                         data-category={cat}
                         aria-pressed={cat === "All" ? "true" : "false"}
@@ -151,27 +156,45 @@ const getSkillIcon = (name: string) => {
                                 class="w-4 h-4 opacity-50 group-hover/repo:opacity-100 invert transition-opacity"
                             />
                         </a>
-                        <a
-                            href={project.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="p-2.5 rounded-full bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group/link"
-                            title="Visit Website"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50 group-hover/link:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                            </svg>
-                        </a>
+                        {hasLiveUrl(project.url) && (
+                            <a
+                                href={project.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="p-2.5 rounded-full bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group/link"
+                                title="Visit Website"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50 group-hover/link:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        )}
                     </div>
                 </div>
 
                 <div class="mb-6">
-                    <a href={project.url} target="_blank" class="inline-block group/title">
-                        <h3 class="text-3xl md:text-4xl font-black tracking-tighter uppercase transition-all duration-500 leading-none project-title">
-                            {project.title}
-                        </h3>
-                        <div class="h-px w-0 bg-[var(--project-color)] transition-all duration-500 group-hover:w-full group-[.is-active]:w-full mt-2"></div>
-                    </a>
+                    {hasLiveUrl(project.url) ? (
+                        <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-block group/title"
+                        >
+                            <h3 class="text-3xl md:text-4xl font-black tracking-tighter uppercase transition-all duration-500 leading-none project-title">
+                                {project.title}
+                            </h3>
+                            <div class="h-px w-0 bg-[var(--project-color)] transition-all duration-500 group-hover:w-full group-[.is-active]:w-full mt-2"></div>
+                        </a>
+                    ) : (
+                        <div class="inline-block">
+                            <h3 class="text-3xl md:text-4xl font-black tracking-tighter uppercase transition-all duration-500 leading-none project-title">
+                                {project.title}
+                            </h3>
+                            <p class="mt-2 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                                Repository available
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 <p class="text-neutral-400 text-sm leading-relaxed mb-10 grow font-medium">
@@ -210,6 +233,46 @@ const getSkillIcon = (name: string) => {
 
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const showCard = (card: Element) => {
+        (card as HTMLElement).style.display = 'flex';
+
+        if (prefersReducedMotion.matches) {
+            (card as HTMLElement).style.opacity = '1';
+            (card as HTMLElement).style.transform = 'none';
+            return;
+        }
+
+        gsap.to(card, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power3.out",
+            clearProps: "all"
+        });
+    };
+
+    const hideCard = (card: Element) => {
+        if (prefersReducedMotion.matches) {
+            (card as HTMLElement).style.display = 'none';
+            ScrollTrigger.refresh();
+            return;
+        }
+
+        gsap.to(card, {
+            opacity: 0,
+            scale: 0.9,
+            y: 20,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+                (card as HTMLElement).style.display = 'none';
+                ScrollTrigger.refresh();
+            }
+        });
+    };
 
     // Filter logic
     filterBtns.forEach(btn => {
@@ -228,33 +291,16 @@ const getSkillIcon = (name: string) => {
                 const isVisible = category === 'All' || cardCat === category;
 
                 if (isVisible) {
-                    (card as HTMLElement).style.display = 'flex';
-                    gsap.to(card, {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        duration: 0.5,
-                        ease: "power3.out",
-                        clearProps: "all"
-                    });
+                    showCard(card);
                 } else {
-                    gsap.to(card, {
-                        opacity: 0,
-                        scale: 0.9,
-                        y: 20,
-                        duration: 0.3,
-                        ease: "power2.in",
-                        onComplete: () => {
-                            (card as HTMLElement).style.display = 'none';
-                            ScrollTrigger.refresh();
-                        }
-                    });
+                    hideCard(card);
                 }
             });
 
+            const refreshDelay = prefersReducedMotion.matches ? 0 : 550;
             setTimeout(() => {
                 ScrollTrigger.refresh();
-            }, 550);
+            }, refreshDelay);
         });
     });
 

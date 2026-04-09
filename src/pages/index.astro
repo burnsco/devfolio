@@ -87,7 +87,7 @@ const NAV_ITEMS = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<!-- JSON-LD Structured Data -->
-		<script type="application/ld+json" set:html={JSON.stringify({
+			<script is:inline type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "Person",
 			"name": "Corey Burns",
@@ -119,67 +119,49 @@ const NAV_ITEMS = [
 			import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 			gsap.registerPlugin(ScrollTrigger);
+			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 			// Initialize animations
 			const init = () => {
-				// Skew effect on scroll
-				const proxy = { skew: 0 };
-				const skewSetter = gsap.quickSetter(".vdf-skew", "skewY", "deg");
-				const clamp = gsap.utils.clamp(-20, 20);
+				if (!prefersReducedMotion.matches) {
+					// Reveal animations
+					gsap.utils.toArray(".vdf-reveal").forEach((el: any) => {
+						gsap.fromTo(
+							el,
+							{ opacity: 0, y: 50 },
+							{
+								opacity: 1,
+								y: 0,
+								duration: 1.2,
+								ease: "power4.out",
+								scrollTrigger: {
+									trigger: el,
+									start: "top 90%",
+									toggleActions: "play none none reverse",
+								},
+							}
+						);
+					});
 
-				ScrollTrigger.create({
-					onUpdate: (self) => {
-						const skew = clamp(self.getVelocity() / -300);
-						if (Math.abs(skew) > Math.abs(proxy.skew)) {
-							proxy.skew = skew;
-							gsap.to(proxy, {
-								skew: 0,
+					// Stagger animations
+					gsap.utils.toArray(".vdf-stagger").forEach((el: any) => {
+						gsap.fromTo(
+							el,
+							{ opacity: 0, x: -20 },
+							{
+								opacity: 1,
+								x: 0,
 								duration: 0.8,
-								ease: "power3",
-								overwrite: true,
-								onUpdate: () => skewSetter(proxy.skew),
-							});
-						}
-					},
-				});
-
-				// Reveal animations
-				gsap.utils.toArray(".vdf-reveal").forEach((el: any) => {
-					gsap.fromTo(
-						el,
-						{ opacity: 0, y: 50 },
-						{
-							opacity: 1,
-							y: 0,
-							duration: 1.2,
-							ease: "power4.out",
-							scrollTrigger: {
-								trigger: el,
-								start: "top 90%",
-								toggleActions: "play none none reverse",
-							},
-						}
-					);
-				});
-
-				// Stagger animations
-				gsap.utils.toArray(".vdf-stagger").forEach((el: any) => {
-					gsap.fromTo(
-						el,
-						{ opacity: 0, x: -20 },
-						{
-							opacity: 1,
-							x: 0,
-							duration: 0.8,
-							ease: "power3.out",
-							scrollTrigger: {
-								trigger: el,
-								start: "top 95%",
-								toggleActions: "play none none reverse",
-							},
-						}
-					);
-				});
+								ease: "power3.out",
+								scrollTrigger: {
+									trigger: el,
+									start: "top 95%",
+									toggleActions: "play none none reverse",
+								},
+							}
+						);
+					});
+				}
 
 				// Section tracking
 				const navItems = ["hero", "projects", "skills", "about", "contact"];
@@ -199,30 +181,13 @@ const NAV_ITEMS = [
 				window.dispatchEvent(event);
 			};
 
-			// Handle scroll to
-			window.addEventListener("scrollTo", (e: any) => {
-				scrollTo(e.detail);
-			});
-
-			const scrollTo = (id: string) => {
-				const element = document.getElementById(`vdf-${id}`);
-				if (element) {
-					element.scrollIntoView({
-						behavior: "smooth",
-					});
-				}
-			};
-
-			// Listen for data-scroll-to clicks
-			document.addEventListener("click", (e: any) => {
-				const target = e.target.closest("[data-scroll-to]");
-				if (target) {
-					const id = target.getAttribute("data-scroll-to");
-					scrollTo(id);
-				}
-			});
-
 			init();
+
+			prefersReducedMotion.addEventListener("change", () => {
+				ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+				gsap.killTweensOf(".vdf-reveal, .vdf-stagger");
+				init();
+			});
 		</script>
 	</body>
 </html>
