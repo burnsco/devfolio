@@ -7,6 +7,10 @@
   },
   "routes": [
     {
+      "pattern": "coreyburns.ca",
+      "custom_domain": true
+    },
+    {
       "pattern": "www.coreyburns.ca",
       "custom_domain": true
     }
