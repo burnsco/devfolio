@@ -163,6 +163,40 @@ const NAV_ITEMS = [
 					});
 				}
 
+				// Hero entrance animation (on-load, not scroll-triggered)
+				const heroItems = gsap.utils.toArray("[data-hero-item]") as HTMLElement[];
+				if (heroItems.length) {
+					gsap.set(heroItems, { opacity: 0, y: 40 });
+					gsap.to(heroItems, {
+						opacity: 1,
+						y: 0,
+						duration: 1,
+						ease: "power4.out",
+						stagger: 0.15,
+						delay: 0.2,
+						clearProps: "transform",
+					});
+				}
+
+				// Scroll indicator fade-out
+				const scrollIndicator = document.getElementById("hero-scroll-indicator");
+				if (scrollIndicator) {
+					ScrollTrigger.create({
+						trigger: "#vdf-hero",
+						start: "top top",
+						end: "20% top",
+						onUpdate: (self) => {
+							scrollIndicator.style.opacity = String(Math.max(0, 1 - self.progress * 3));
+						},
+						onLeave: () => {
+							scrollIndicator.style.display = "none";
+						},
+						onEnterBack: () => {
+							scrollIndicator.style.display = "flex";
+						},
+					});
+				}
+
 				// Section tracking
 				const navItems = ["hero", "projects", "skills", "about", "contact"];
 				navItems.forEach((id) => {
