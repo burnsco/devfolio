@@ -28,7 +28,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 				href={`#vdf-${item.id}`}
 				data-scroll-to={item.id}
 				data-nav-link={item.id}
-				class={`text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 ${
+				class={`text-[11px] uppercase tracking-[0.3em] font-bold transition-all duration-300 ${
 					activeSection === item.id
 						? "text-red-500"
 						: "text-white/60 hover:text-white"
@@ -235,9 +235,9 @@ const { navItems, activeSection = "hero" } = Astro.props;
 	updateBackdrop();
 
 	// Handle section changes from index.astro
-	window.addEventListener("sectionChange", (e: any) => {
+	window.addEventListener("sectionChange", ((e: CustomEvent<string>) => {
 		const activeId = e.detail;
-		
+
 		navLinks.forEach((link) => {
 			const id = link.getAttribute("data-nav-link");
 			if (id === activeId) {
@@ -259,11 +259,17 @@ const { navItems, activeSection = "hero" } = Astro.props;
 				link.classList.add("text-white");
 			}
 		});
-	});
+	}) as EventListener);
 
-	// Close menu on link click
+	// Smooth scroll + close menu on link click
 	document.querySelectorAll("[data-scroll-to]").forEach((link) => {
-		link.addEventListener("click", () => {
+		link.addEventListener("click", (e) => {
+			e.preventDefault();
+			const targetId = link.getAttribute("data-scroll-to");
+			const target = document.getElementById(`vdf-${targetId}`);
+			if (target) {
+				target.scrollIntoView({ behavior: "smooth" });
+			}
 			if (isMenuOpen) closeMenu();
 		});
 	});

@@ -125,7 +125,7 @@ const NAV_ITEMS = [
 			const init = () => {
 				if (!prefersReducedMotion.matches) {
 					// Reveal animations
-					gsap.utils.toArray(".vdf-reveal").forEach((el: any) => {
+					gsap.utils.toArray<HTMLElement>(".vdf-reveal").forEach((el) => {
 						gsap.fromTo(
 							el,
 							{ opacity: 0, y: 50 },
@@ -144,7 +144,7 @@ const NAV_ITEMS = [
 					});
 
 					// Stagger animations
-					gsap.utils.toArray(".vdf-stagger").forEach((el: any) => {
+					gsap.utils.toArray<HTMLElement>(".vdf-stagger").forEach((el) => {
 						gsap.fromTo(
 							el,
 							{ opacity: 0, x: -20 },

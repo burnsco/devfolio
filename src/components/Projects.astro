@@ -89,21 +89,21 @@ const getSkillIcon = (name: string) => {
 <section id="vdf-projects" class="px-8 py-32 lg:px-24 scroll-mt-20">
 	<div class="flex flex-col xl:flex-row items-start xl:items-end justify-between mb-16 vdf-reveal gap-12">
 		<div class="max-w-2xl">
-			<p class="mb-4 font-mono text-sm tracking-[0.3em] text-red-500 uppercase font-semibold">
+			<p class="mb-4 font-mono text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] text-red-500 uppercase font-semibold">
 				Selected Works
 			</p>
-			<h2 class="text-6xl font-black tracking-tighter uppercase md:text-8xl leading-[0.9]">
+			<h2 class="text-5xl font-black tracking-tighter uppercase sm:text-6xl md:text-8xl leading-[0.9]">
 				Projects
 			</h2>
 		</div>
 
         <div class="flex flex-col gap-6 w-full xl:w-auto">
             <div class="flex items-center justify-between xl:justify-end gap-4">
-                <p class="font-mono text-xs tracking-widest text-neutral-500 uppercase">
+                <p class="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
                     Filter by Category
                 </p>
                 <div class="h-px w-12 bg-neutral-800 hidden xl:block"></div>
-                <p class="font-mono text-xs tracking-widest text-neutral-500 uppercase">
+                <p class="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
                     {String(totalProjects).padStart(2, "0")} Total
                 </p>
             </div>
@@ -111,7 +111,7 @@ const getSkillIcon = (name: string) => {
                 {categories.map((cat) => (
                     <button
                         type="button"
-                        class="filter-btn group relative px-5 py-2.5 rounded-full border border-neutral-800 text-neutral-500 font-mono text-[10px] uppercase tracking-widest transition-all duration-500 hover:border-red-500/40 hover:text-white"
+                        class="filter-btn group relative px-5 py-2.5 rounded-full border border-neutral-800 text-neutral-500 font-mono text-[11px] uppercase tracking-widest transition-all duration-500 hover:border-red-500/40 hover:text-white"
                         data-category={cat}
                         aria-pressed={cat === "All" ? "true" : "false"}
                     >
@@ -124,7 +124,7 @@ const getSkillIcon = (name: string) => {
         </div>
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 project-grid items-start">
+	<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 project-grid items-start">
 		{allProjects.map((project) => (
 			<div
 				class="project-card group relative flex flex-col bg-[#0d0d0d]/50 border border-white/5 rounded-3xl p-8 hover:bg-[#121212] transition-all duration-700 ease-out vdf-reveal overflow-hidden h-full"
@@ -137,7 +137,7 @@ const getSkillIcon = (name: string) => {
                 <div class="flex items-start justify-between mb-8">
                     <div class="flex flex-col">
                         <span class="font-mono text-sm font-bold text-red-500 mb-1">{project.id}</span>
-                        <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-600 font-bold group-hover:text-neutral-400 transition-colors group-[.is-active]:text-neutral-400">
+                        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-600 font-bold group-hover:text-neutral-400 transition-colors group-[.is-active]:text-neutral-400">
                             {project.category}
                         </span>
                     </div>
@@ -190,7 +190,7 @@ const getSkillIcon = (name: string) => {
                             <h3 class="text-3xl md:text-4xl font-black tracking-tighter uppercase transition-all duration-500 leading-none project-title">
                                 {project.title}
                             </h3>
-                            <p class="mt-2 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                            <p class="mt-2 text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-500">
                                 Repository available
                             </p>
                         </div>
@@ -206,7 +206,7 @@ const getSkillIcon = (name: string) => {
                         {project.tech.split(" · ").map((t) => {
                             const icon = getSkillIcon(t);
                             return (
-                                <span class="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 group-[.is-active]:border-white/10 group-[.is-active]:text-neutral-300 transition-all duration-500">
+                                <span class="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 group-[.is-active]:border-white/10 group-[.is-active]:text-neutral-300 transition-all duration-500">
                                     {icon && (
                                         <Icon 
                                             name={icon} 
@@ -305,24 +305,32 @@ const getSkillIcon = (name: string) => {
     });
 
     // Mobile Scroll Activation using Intersection Observer
-    if (window.innerWidth < 768) {
-        const observerOptions = {
-            threshold: 0.7,
-            rootMargin: "-10% 0px -10% 0px"
-        };
+    const observerOptions = {
+        threshold: 0.7,
+        rootMargin: "-10% 0px -10% 0px"
+    };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-active');
-                } else {
-                    entry.target.classList.remove('is-active');
-                }
-            });
-        }, observerOptions);
+    let mobileObserver: IntersectionObserver | null = null;
 
-        projectCards.forEach(card => observer.observe(card));
-    }
+    const setupMobileObserver = () => {
+        const isMobile = window.innerWidth < 768;
+
+        if (isMobile && !mobileObserver) {
+            mobileObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    entry.target.classList.toggle('is-active', entry.isIntersecting);
+                });
+            }, observerOptions);
+            projectCards.forEach(card => mobileObserver!.observe(card));
+        } else if (!isMobile && mobileObserver) {
+            mobileObserver.disconnect();
+            mobileObserver = null;
+            projectCards.forEach(card => card.classList.remove('is-active'));
+        }
+    };
+
+    setupMobileObserver();
+    window.addEventListener("resize", setupMobileObserver, { passive: true });
 
     // Initialize the "All" button style
     document.querySelector('.filter-btn[data-category="All"] span')?.classList.add('text-white');
