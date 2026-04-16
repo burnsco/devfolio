@@ -1,3 +1,26 @@
+export const proficiencies: { name: string; pct: number }[] = [
+  { name: "TypeScript / JavaScript", pct: 87 },
+  { name: "React, Vite & Astro", pct: 92 },
+  { name: "DevOps / Docker / CI", pct: 95 },
+  { name: "Node.js & Serverless", pct: 90 },
+  { name: "PostgreSQL / Redis", pct: 90 },
+  { name: "Go", pct: 75 },
+];
+
+export const experience: {
+  role: string;
+  company: string;
+  period: string;
+  type: string;
+}[] = [
+  {
+    role: "Full-Stack Developer",
+    company: "Freelance / Independent",
+    period: "2023 – 2026",
+    type: "Freelance",
+  },
+];
+
 export const skills = [
   {
     category: "Frontend",

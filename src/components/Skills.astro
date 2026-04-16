@@ -1,55 +1,90 @@
 ---
-import { Icon } from 'astro-icon/components';
+interface Proficiency {
+	name: string;
+	pct: number;
+}
 
-interface SkillGroup {
-	category: string;
-	items: { name: string; icon: string }[];
+interface ExperienceEntry {
+	role: string;
+	company: string;
+	period: string;
+	type: string;
 }
 
 interface Props {
-	skills: SkillGroup[];
+	proficiencies: Proficiency[];
+	experience: ExperienceEntry[];
 }
 
-const { skills } = Astro.props;
+const { proficiencies, experience } = Astro.props;
 ---
 
 <section
 	id="vdf-skills"
 	class="px-8 py-20 lg:px-24 bg-[var(--bg-section)] border-y border-[var(--border-hairline)] scroll-mt-20"
 >
-	<div class="mb-12 vdf-reveal">
+	<div class="mb-14 vdf-reveal">
 		<p class="mb-2 font-mono text-sm tracking-widest text-red-500 uppercase">
 			<span class="text-red-500/60">02 —</span> Capabilities
 		</p>
 		<h2 class="text-3xl font-black tracking-tighter uppercase sm:text-4xl md:text-6xl">
-			Skills
+			Skills <span class="outline-title">&amp; Experience</span>
 		</h2>
 	</div>
-	<div class="grid gap-12 md:grid-cols-2 xl:grid-cols-4">
-		{skills.map((group) => (
-			<div class="vdf-reveal">
-				<h3 class="pb-3 mb-6 font-mono text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-red-500 uppercase border-b border-[var(--border-hairline)] font-bold">
-					{group.category}
-				</h3>
-				<ul class="grid grid-cols-3 gap-3">
-					{group.items.map((skill) => (
-						<li
-							class="vdf-stagger group/skill"
-							title={skill.name}
-						>
-							<div class="relative flex flex-col items-center justify-center p-3 transition-all duration-500 rounded-lg bg-[var(--fill-tint-2)] border border-[var(--border-hairline)] hover:border-[var(--border-muted)] hover:bg-[var(--fill-tint-5)] group-hover/skill:-translate-y-1">
-								<Icon
-									name={skill.icon}
-									class="w-8 h-8 mb-2 transition-all duration-500 group-hover/skill:scale-110 grayscale group-hover/skill:grayscale-0 opacity-40 group-hover/skill:opacity-100"
-								/>
-								<span class="text-[10px] leading-tight text-center uppercase tracking-wider sm:tracking-widest text-[var(--text-tertiary)] group-hover/skill:text-[var(--text-primary)] transition-colors duration-500">
-									{skill.name}
+
+	<div class="grid gap-16 md:grid-cols-2 md:gap-20">
+		<div class="vdf-reveal">
+			<h3 class="mb-8 font-mono text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-red-500 uppercase font-bold pb-3 border-b border-[var(--border-hairline)]">
+				Proficiencies
+			</h3>
+			<div class="space-y-7">
+				{proficiencies.map((skill) => (
+					<div class="vdf-stagger">
+						<div class="flex items-center justify-between mb-2">
+							<span class="text-sm font-medium text-[var(--text-secondary)]">
+								{skill.name}
+							</span>
+							<span class="font-mono text-xs text-[var(--text-muted)]">
+								{skill.pct}%
+							</span>
+						</div>
+						<div class="h-1.5 rounded-full overflow-hidden bg-[var(--fill-tint-5)]">
+							<div
+								class="h-full rounded-full bg-red-500"
+								style={`width: ${skill.pct}%`}
+							></div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<div class="vdf-reveal">
+			<h3 class="mb-8 font-mono text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-red-500 uppercase font-bold pb-3 border-b border-[var(--border-hairline)]">
+				Experience
+			</h3>
+			<div class="relative">
+				<div class="absolute top-0 bottom-0 left-0 w-px bg-[var(--border-muted)]"></div>
+				<div class="pl-8 space-y-10">
+					{experience.map((exp) => (
+						<div class="relative vdf-stagger">
+							<div class="absolute -left-[33px] top-1.5 w-2.5 h-2.5 rounded-full bg-red-500 ring-4 ring-[var(--bg-section)]"></div>
+							<div class="flex flex-wrap items-start justify-between gap-2 mb-1">
+								<h4 class="font-bold text-[var(--text-primary)]">
+									{exp.role}
+								</h4>
+								<span class="px-2 py-0.5 font-mono text-xs border border-[var(--border-muted)] text-[var(--text-muted)] uppercase tracking-widest">
+									{exp.type}
 								</span>
 							</div>
-						</li>
+							<p class="text-sm font-semibold text-red-500">{exp.company}</p>
+							<p class="mt-1 font-mono text-xs text-[var(--text-muted)]">
+								{exp.period}
+							</p>
+						</div>
 					))}
-				</ul>
+				</div>
 			</div>
-		))}
+		</div>
 	</div>
 </section>
