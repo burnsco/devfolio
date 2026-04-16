@@ -15,11 +15,11 @@ const { skills } = Astro.props;
 
 <section
 	id="vdf-skills"
-	class="px-8 py-20 lg:px-24 bg-neutral-950 border-y border-white/5 scroll-mt-20"
+	class="px-8 py-20 lg:px-24 bg-[var(--bg-section)] border-y border-[var(--border-hairline)] scroll-mt-20"
 >
 	<div class="mb-12 vdf-reveal">
 		<p class="mb-2 font-mono text-sm tracking-widest text-red-500 uppercase">
-			Capabilities
+			<span class="text-red-500/60">02 —</span> Capabilities
 		</p>
 		<h2 class="text-3xl font-black tracking-tighter uppercase sm:text-4xl md:text-6xl">
 			Skills
@@ -28,7 +28,7 @@ const { skills } = Astro.props;
 	<div class="grid gap-12 md:grid-cols-2 xl:grid-cols-4">
 		{skills.map((group) => (
 			<div class="vdf-reveal">
-				<h3 class="pb-3 mb-6 font-mono text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-red-500 uppercase border-b border-white/5 font-bold">
+				<h3 class="pb-3 mb-6 font-mono text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-red-500 uppercase border-b border-[var(--border-hairline)] font-bold">
 					{group.category}
 				</h3>
 				<ul class="grid grid-cols-3 gap-3">
@@ -37,12 +37,12 @@ const { skills } = Astro.props;
 							class="vdf-stagger group/skill"
 							title={skill.name}
 						>
-							<div class="relative flex flex-col items-center justify-center p-3 transition-all duration-500 rounded-lg bg-white/[0.02] border border-white/[0.03] hover:border-white/10 hover:bg-white/[0.05] group-hover/skill:-translate-y-1">
+							<div class="relative flex flex-col items-center justify-center p-3 transition-all duration-500 rounded-lg bg-[var(--fill-tint-2)] border border-[var(--border-hairline)] hover:border-[var(--border-muted)] hover:bg-[var(--fill-tint-5)] group-hover/skill:-translate-y-1">
 								<Icon
 									name={skill.icon}
 									class="w-8 h-8 mb-2 transition-all duration-500 group-hover/skill:scale-110 grayscale group-hover/skill:grayscale-0 opacity-40 group-hover/skill:opacity-100"
 								/>
-								<span class="text-[10px] leading-tight text-center uppercase tracking-wider sm:tracking-widest text-neutral-400 group-hover/skill:text-neutral-200 transition-colors duration-500">
+								<span class="text-[10px] leading-tight text-center uppercase tracking-wider sm:tracking-widest text-[var(--text-tertiary)] group-hover/skill:text-[var(--text-primary)] transition-colors duration-500">
 									{skill.name}
 								</span>
 							</div>

@@ -1,0 +1,69 @@
+---
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
+import "../index.css";
+import ThemeBootstrap from "../components/ThemeBootstrap.astro";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>404 — Page Not Found · Corey Burns</title>
+		<meta name="robots" content="noindex, follow" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<ThemeBootstrap />
+	</head>
+	<body
+		class="min-h-screen overflow-x-hidden selection:bg-red-500/30 font-sans flex items-center justify-center px-8"
+	>
+		<div class="noise"></div>
+
+		<main class="relative z-10 w-full max-w-4xl text-center">
+			<p
+				class="mb-6 font-mono text-[11px] sm:text-xs tracking-[0.4em] sm:tracking-[0.5em] text-red-500 uppercase font-bold"
+			>
+				Error · Signal Lost
+			</p>
+
+			<h1
+				class="text-[28vw] md:text-[20vw] leading-[0.8] font-black tracking-tighter mb-4 outline-title select-none"
+			>
+				404
+			</h1>
+
+			<div class="flex items-center justify-center gap-6 my-12">
+				<div class="w-16 h-px bg-red-500"></div>
+				<p
+					class="max-w-md font-mono uppercase tracking-[0.2em] text-xs leading-relaxed text-[var(--text-tertiary)] font-medium"
+				>
+					This page went dark. The page you were looking for
+					doesn't exist or was moved.
+				</p>
+				<div class="w-16 h-px bg-red-500"></div>
+			</div>
+
+			<div class="flex flex-wrap justify-center gap-6 mt-12">
+				<a
+					href="/"
+					class="px-8 py-3 text-sm font-bold tracking-widest text-white uppercase transition-colors duration-300 transform bg-red-600 hover:bg-red-700 hover:-skew-x-6"
+				>
+					Back Home
+				</a>
+				<a
+					href="/#vdf-projects"
+					class="px-8 py-3 text-sm font-bold tracking-widest text-[var(--text-primary)] uppercase transition-all duration-300 border border-[var(--border-strong)] hover:border-red-500 hover:text-red-500"
+				>
+					View Projects
+				</a>
+			</div>
+		</main>
+	</body>
+</html>

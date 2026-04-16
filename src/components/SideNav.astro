@@ -14,10 +14,10 @@ const { navItems } = Astro.props;
 			data-side-link={item.id}
 			class="group flex items-center gap-4 text-right"
 		>
-			<span class="side-link-text text-[11px] uppercase tracking-[0.2em] font-bold transition-all duration-300 text-white opacity-0 group-hover:opacity-40">
+			<span class="side-link-text text-[11px] uppercase tracking-[0.2em] font-bold transition-all duration-300 text-[var(--text-primary)] opacity-0 group-hover:opacity-40">
 				{item.label}
 			</span>
-			<div class="side-link-bar w-12 h-px transition-all duration-500 bg-white/10 group-hover:bg-white/30"></div>
+			<div class="side-link-bar w-12 h-px transition-all duration-500 bg-[var(--border-muted)] group-hover:bg-[var(--border-heavy)]"></div>
 		</a>
 	))}
 </div>
@@ -35,14 +35,14 @@ const { navItems } = Astro.props;
 
 			if (id === activeId) {
 				text?.classList.add("text-red-500", "opacity-100");
-				text?.classList.remove("text-white", "opacity-0");
+				text?.classList.remove("text-[var(--text-primary)]", "opacity-0");
 				bar?.classList.add("bg-red-500", "w-16");
-				bar?.classList.remove("bg-white/10", "w-12");
+				bar?.classList.remove("bg-[var(--border-muted)]", "w-12");
 			} else {
 				text?.classList.remove("text-red-500", "opacity-100");
-				text?.classList.add("text-white", "opacity-0");
+				text?.classList.add("text-[var(--text-primary)]", "opacity-0");
 				bar?.classList.remove("bg-red-500", "w-16");
-				bar?.classList.add("bg-white/10", "w-12");
+				bar?.classList.add("bg-[var(--border-muted)]", "w-12");
 			}
 		});
 	}) as EventListener);

@@ -1,0 +1,88 @@
+---
+import { Icon } from "astro-icon/components";
+import { skills as skillGroups } from "../data/skills";
+
+const featuredTech = [
+	"TypeScript",
+	"Next.js",
+	"React",
+	"Astro",
+	"Tailwind",
+	"Node.js",
+	"Go",
+	"PostgreSQL",
+	"Docker",
+	"Cloudflare",
+	"Three.js",
+	"Vite",
+	"Redis",
+	"GraphQL",
+	"Elixir",
+	"Linux",
+];
+
+const allSkills = skillGroups.flatMap((g) => g.items);
+const items = featuredTech
+	.map((name) => allSkills.find((s) => s.name === name))
+	.filter((s): s is { name: string; icon: string } => !!s);
+
+const marqueeItems = [...items, ...items];
+---
+
+<section
+	id="vdf-marquee"
+	aria-hidden="true"
+	class="relative py-10 border-y border-[var(--border-hairline)] bg-[var(--bg-section)] overflow-hidden"
+>
+	<div class="marquee-track flex gap-12 w-max">
+		{
+			marqueeItems.map((item) => (
+				<div class="marquee-item flex items-center gap-3 shrink-0">
+					<Icon
+						name={item.icon}
+						class="w-6 h-6 text-[var(--text-muted)] grayscale opacity-60"
+					/>
+					<span class="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--text-muted)] whitespace-nowrap">
+						{item.name}
+					</span>
+					<span class="text-red-500/40 font-mono text-lg leading-none">·</span>
+				</div>
+			))
+		}
+	</div>
+
+	<div
+		class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--bg-section)] to-transparent"
+	>
+	</div>
+	<div
+		class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--bg-section)] to-transparent"
+	>
+	</div>
+</section>
+
+<style>
+	.marquee-track {
+		animation: marquee-scroll 50s linear infinite;
+		will-change: transform;
+	}
+
+	#vdf-marquee:hover .marquee-track {
+		animation-play-state: paused;
+	}
+
+	@keyframes marquee-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.marquee-track {
+			animation: none;
+		}
+	}
+</style>

@@ -4,12 +4,86 @@
 :root {
   color-scheme: dark;
   font-family: "Space Grotesk", system-ui, sans-serif;
+
+  /* Semantic color tokens — dark (default) */
+  --bg-base: #0a0a0a;
+  --bg-surface: #0a0a0a;
+  --bg-surface-raised: #171717;
+  --bg-section: #0a0a0a;
+  --bg-card: rgb(13 13 13 / 0.5);
+  --bg-card-hover: #121212;
+  --bg-nav: rgb(10 10 10 / 0.8);
+  --bg-overlay: rgb(0 0 0 / 0.7);
+  --bg-overlay-menu: rgb(10 10 10 / 0.9);
+
+  --text-primary: #ffffff;
+  --text-secondary: rgb(255 255 255 / 0.6);
+  --text-tertiary: #a3a3a3; /* neutral-400 */
+  --text-muted: #737373; /* neutral-500 */
+  --text-faint: #525252; /* neutral-600 */
+
+  --border-hairline: rgb(255 255 255 / 0.05);
+  --border-subtle: rgb(255 255 255 / 0.08);
+  --border-muted: rgb(255 255 255 / 0.1);
+  --border-strong: rgb(255 255 255 / 0.2);
+  --border-heavy: rgb(255 255 255 / 0.3);
+
+  --fill-tint-2: rgb(255 255 255 / 0.02);
+  --fill-tint-5: rgb(255 255 255 / 0.05);
+  --fill-tint-10: rgb(255 255 255 / 0.1);
+
+  --scrollbar-track: #0a0a0a;
+  --scrollbar-thumb: #262626;
+
+  --noise-opacity: 0.05;
+  --icon-invert: 1;
+  --outline-stroke: rgb(255 255 255 / 0.3);
+  --outline-stroke-faint: rgb(255 255 255 / 0.15);
+}
+
+:root.light {
+  color-scheme: light;
+
+  --bg-base: #fafaf9; /* stone-50 */
+  --bg-surface: #ffffff;
+  --bg-surface-raised: #ffffff;
+  --bg-section: #f5f5f4; /* stone-100 */
+  --bg-card: rgb(255 255 255 / 0.7);
+  --bg-card-hover: #ffffff;
+  --bg-nav: rgb(250 250 249 / 0.85);
+  --bg-overlay: rgb(10 10 10 / 0.4);
+  --bg-overlay-menu: rgb(255 255 255 / 0.92);
+
+  --text-primary: #0a0a0a;
+  --text-secondary: rgb(10 10 10 / 0.72);
+  --text-tertiary: #525252; /* neutral-600 */
+  --text-muted: #737373; /* neutral-500 */
+  --text-faint: #a3a3a3; /* neutral-400 */
+
+  --border-hairline: rgb(10 10 10 / 0.06);
+  --border-subtle: rgb(10 10 10 / 0.08);
+  --border-muted: rgb(10 10 10 / 0.12);
+  --border-strong: rgb(10 10 10 / 0.22);
+  --border-heavy: rgb(10 10 10 / 0.35);
+
+  --fill-tint-2: rgb(10 10 10 / 0.03);
+  --fill-tint-5: rgb(10 10 10 / 0.05);
+  --fill-tint-10: rgb(10 10 10 / 0.08);
+
+  --scrollbar-track: #f5f5f4;
+  --scrollbar-thumb: #d6d3d1;
+
+  --noise-opacity: 0.035;
+  --icon-invert: 0;
+  --outline-stroke: rgb(10 10 10 / 0.35);
+  --outline-stroke-faint: rgb(10 10 10 / 0.2);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #0a0a0a;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
 }
 
 * {
@@ -24,14 +98,19 @@ body {
   height: 100%;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 .outline-title {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgba(255, 255, 255, 0.3);
+  -webkit-text-stroke-color: var(--outline-stroke);
+}
+
+/* Adaptive icon inversion: dark SVGs invert to white in dark mode, pass-through in light */
+.icon-adaptive {
+  filter: invert(var(--icon-invert));
 }
 
 ::selection {
@@ -45,11 +124,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262626;
+  background: var(--scrollbar-thumb);
   border-radius: 10px;
 }
 

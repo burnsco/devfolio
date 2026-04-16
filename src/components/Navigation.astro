@@ -12,17 +12,17 @@ const { navItems, activeSection = "hero" } = Astro.props;
 	aria-label="Primary"
 	class="group fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-12 md:py-8 transition-all duration-300"
 >
-	<div id="nav-backdrop" class="absolute inset-0 bg-neutral-950/80 backdrop-blur-md border-b border-white/5 opacity-0 transition-opacity duration-300 pointer-events-none"></div>
-	
+	<div id="nav-backdrop" class="absolute inset-0 bg-[var(--bg-nav)] backdrop-blur-md border-b border-[var(--border-hairline)] opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+
 	<a
 		href="#vdf-hero"
 		data-scroll-to="hero"
-		class="relative z-10 text-2xl font-black tracking-tighter uppercase text-white mix-blend-difference"
+		class="relative z-10 text-2xl font-black tracking-tighter uppercase text-[var(--text-primary)]"
 	>
 		CB<span class="text-red-500">.</span>
 	</a>
-	
-	<div class="relative z-10 items-center hidden md:flex gap-10">
+
+	<div class="relative z-10 items-center hidden md:flex gap-8 lg:gap-10">
 		{navItems.map((item) => (
 			<a
 				href={`#vdf-${item.id}`}
@@ -31,32 +31,84 @@ const { navItems, activeSection = "hero" } = Astro.props;
 				class={`text-[11px] uppercase tracking-[0.3em] font-bold transition-all duration-300 ${
 					activeSection === item.id
 						? "text-red-500"
-						: "text-white/60 hover:text-white"
+						: "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
 				} hover:tracking-[0.4em]`}
 			>
 				{item.label}
 			</a>
 		))}
+		<button
+			type="button"
+			data-cmdk-trigger
+			aria-label="Open command palette"
+			class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md border border-[var(--border-muted)] bg-[var(--fill-tint-5)] hover:border-red-500/40 hover:bg-red-500/5 transition-colors duration-300 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"
+		>
+			<kbd class="font-mono text-[11px]">⌘K</kbd>
+		</button>
+		<button
+			type="button"
+			data-theme-toggle
+			aria-label="Toggle color theme"
+			class="relative inline-flex items-center justify-center w-8 h-8 rounded-md border border-[var(--border-muted)] bg-[var(--fill-tint-5)] hover:border-red-500/40 hover:bg-red-500/5 transition-colors duration-300 text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"
+		>
+			<svg data-theme-icon="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+			</svg>
+			<svg data-theme-icon="light" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<circle cx="12" cy="12" r="4" />
+				<path d="M12 2v2" />
+				<path d="M12 20v2" />
+				<path d="m4.93 4.93 1.41 1.41" />
+				<path d="m17.66 17.66 1.41 1.41" />
+				<path d="M2 12h2" />
+				<path d="M20 12h2" />
+				<path d="m6.34 17.66-1.41 1.41" />
+				<path d="m19.07 4.93-1.41 1.41" />
+			</svg>
+		</button>
 	</div>
 
-	<button
-		type="button"
-		id="menu-toggle"
-		class="relative z-10 flex flex-col gap-1.5 md:hidden p-2 group"
-		aria-label="Toggle Menu"
-		aria-controls="mobile-menu"
-		aria-expanded="false"
-	>
-		<span class="menu-bar w-6 h-0.5 bg-white transition-all duration-300"></span>
-		<span class="menu-bar w-6 h-0.5 bg-white transition-all duration-300"></span>
-		<span class="menu-bar w-6 h-0.5 bg-white transition-all duration-300"></span>
-	</button>
+	<div class="relative z-10 flex items-center gap-2 md:hidden">
+		<button
+			type="button"
+			data-theme-toggle
+			aria-label="Toggle color theme"
+			class="inline-flex items-center justify-center w-9 h-9 rounded-md border border-[var(--border-muted)] bg-[var(--fill-tint-5)] text-[var(--text-tertiary)]"
+		>
+			<svg data-theme-icon="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+			</svg>
+			<svg data-theme-icon="light" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<circle cx="12" cy="12" r="4" />
+				<path d="M12 2v2" />
+				<path d="M12 20v2" />
+				<path d="m4.93 4.93 1.41 1.41" />
+				<path d="m17.66 17.66 1.41 1.41" />
+				<path d="M2 12h2" />
+				<path d="M20 12h2" />
+				<path d="m6.34 17.66-1.41 1.41" />
+				<path d="m19.07 4.93-1.41 1.41" />
+			</svg>
+		</button>
+		<button
+			type="button"
+			id="menu-toggle"
+			class="flex flex-col gap-1.5 p-2 group"
+			aria-label="Toggle Menu"
+			aria-controls="mobile-menu"
+			aria-expanded="false"
+		>
+			<span class="menu-bar w-6 h-0.5 bg-[var(--text-primary)] transition-all duration-300"></span>
+			<span class="menu-bar w-6 h-0.5 bg-[var(--text-primary)] transition-all duration-300"></span>
+			<span class="menu-bar w-6 h-0.5 bg-[var(--text-primary)] transition-all duration-300"></span>
+		</button>
+	</div>
 </nav>
 
 <button
 	type="button"
 	id="menu-overlay"
-	class="fixed inset-0 z-50 transition-opacity pointer-events-none bg-neutral-950/90 backdrop-blur-md opacity-0 border-none w-full h-full text-transparent cursor-default"
+	class="fixed inset-0 z-50 transition-opacity pointer-events-none bg-[var(--bg-overlay-menu)] backdrop-blur-md opacity-0 border-none w-full h-full text-transparent cursor-default"
 	aria-label="Close Menu"
 	aria-hidden="true"
 	hidden
@@ -68,7 +120,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 	aria-hidden="true"
 	hidden
 	inert
-	class="fixed top-0 right-0 bottom-0 w-[80%] max-w-[400px] bg-neutral-900 z-50 translate-x-full flex flex-col justify-center px-12 border-l border-white/5"
+	class="fixed top-0 right-0 bottom-0 w-[80%] max-w-[400px] bg-[var(--bg-surface-raised)] z-50 translate-x-full flex flex-col justify-center px-12 border-l border-[var(--border-hairline)]"
 >
 	<div class="flex flex-col gap-8">
 		{navItems.map((item, index) => (
@@ -77,7 +129,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 				data-scroll-to={item.id}
 				data-mobile-link={item.id}
 				class={`mobile-link text-left text-3xl font-black uppercase tracking-tighter transition-colors duration-300 ${
-					activeSection === item.id ? "text-red-500" : "text-white"
+					activeSection === item.id ? "text-red-500" : "text-[var(--text-primary)]"
 				}`}
 			>
 				<span class="mr-4 text-xs font-mono text-red-500">
@@ -89,7 +141,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 	</div>
 
 	<div class="absolute bottom-12 left-12 right-12">
-		<div class="w-full h-px mb-8 bg-white/5"></div>
+		<div class="w-full h-px mb-8 bg-[var(--border-hairline)]"></div>
 		<div class="flex gap-6">
 			<a
 				href="https://github.com/burnsco"
@@ -100,7 +152,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 				<img
 					src="/icons/github.svg"
 					alt="GitHub"
-					class="w-6 h-6 invert"
+					class="w-6 h-6 icon-adaptive"
 				/>
 			</a>
 			<a
@@ -112,7 +164,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 				<img
 					src="/icons/linkedin.svg"
 					alt="LinkedIn"
-					class="w-6 h-6 invert"
+					class="w-6 h-6 icon-adaptive"
 				/>
 			</a>
 		</div>
@@ -152,8 +204,7 @@ const { navItems, activeSection = "hero" } = Astro.props;
 			previousOverflow = document.body.style.overflow;
 			document.body.style.overflow = "hidden";
 			setMenuAccessibility(true);
-			
-			// Button animation
+
 			gsap.to(menuBars[0], { rotate: 45, y: 8, backgroundColor: "#ef4444", duration: 0.3 });
 			gsap.to(menuBars[1], { opacity: 0, duration: 0.3 });
 			gsap.to(menuBars[2], { rotate: -45, y: -8, backgroundColor: "#ef4444", duration: 0.3 });
@@ -183,11 +234,11 @@ const { navItems, activeSection = "hero" } = Astro.props;
 			);
 		} else {
 			document.body.style.overflow = previousOverflow;
-			
-			// Button animation
-			gsap.to(menuBars[0], { rotate: 0, y: 0, backgroundColor: "#ffffff", duration: 0.3 });
+
+			const primary = getComputedStyle(document.documentElement).getPropertyValue("--text-primary").trim() || "#ffffff";
+			gsap.to(menuBars[0], { rotate: 0, y: 0, backgroundColor: primary, duration: 0.3 });
 			gsap.to(menuBars[1], { opacity: 1, duration: 0.3 });
-			gsap.to(menuBars[2], { rotate: 0, y: 0, backgroundColor: "#ffffff", duration: 0.3 });
+			gsap.to(menuBars[2], { rotate: 0, y: 0, backgroundColor: primary, duration: 0.3 });
 
 			gsap.to(mobileMenu, {
 				x: "100%",
@@ -218,23 +269,32 @@ const { navItems, activeSection = "hero" } = Astro.props;
 		}
 	});
 
-	// Nav backdrop on scroll
 	const navBackdrop = document.getElementById("nav-backdrop");
 	const heroEl = document.getElementById("vdf-hero");
+	let heroHeight = heroEl?.offsetHeight ?? window.innerHeight;
+	let backdropVisible: boolean | null = null;
 
 	const updateBackdrop = () => {
-		const heroHeight = heroEl?.offsetHeight ?? window.innerHeight;
-		if (window.scrollY > heroHeight * 0.15) {
-			navBackdrop?.classList.replace("opacity-0", "opacity-100");
-		} else {
-			navBackdrop?.classList.replace("opacity-100", "opacity-0");
-		}
+		const visible = window.scrollY > heroHeight * 0.15;
+		if (visible === backdropVisible) return;
+		backdropVisible = visible;
+		navBackdrop?.classList.replace(
+			visible ? "opacity-0" : "opacity-100",
+			visible ? "opacity-100" : "opacity-0",
+		);
 	};
 
 	window.addEventListener("scroll", updateBackdrop, { passive: true });
+	window.addEventListener(
+		"resize",
+		() => {
+			heroHeight = heroEl?.offsetHeight ?? window.innerHeight;
+			updateBackdrop();
+		},
+		{ passive: true },
+	);
 	updateBackdrop();
 
-	// Handle section changes from index.astro
 	window.addEventListener("sectionChange", ((e: CustomEvent<string>) => {
 		const activeId = e.detail;
 
@@ -242,10 +302,10 @@ const { navItems, activeSection = "hero" } = Astro.props;
 			const id = link.getAttribute("data-nav-link");
 			if (id === activeId) {
 				link.classList.add("text-red-500");
-				link.classList.remove("text-white/60");
+				link.classList.remove("text-[var(--text-secondary)]");
 			} else {
 				link.classList.remove("text-red-500");
-				link.classList.add("text-white/60");
+				link.classList.add("text-[var(--text-secondary)]");
 			}
 		});
 
@@ -253,15 +313,14 @@ const { navItems, activeSection = "hero" } = Astro.props;
 			const id = link.getAttribute("data-mobile-link");
 			if (id === activeId) {
 				link.classList.add("text-red-500");
-				link.classList.remove("text-white");
+				link.classList.remove("text-[var(--text-primary)]");
 			} else {
 				link.classList.remove("text-red-500");
-				link.classList.add("text-white");
+				link.classList.add("text-[var(--text-primary)]");
 			}
 		});
 	}) as EventListener);
 
-	// Smooth scroll + close menu on link click
 	document.querySelectorAll("[data-scroll-to]").forEach((link) => {
 		link.addEventListener("click", (e) => {
 			e.preventDefault();
@@ -275,4 +334,44 @@ const { navItems, activeSection = "hero" } = Astro.props;
 	});
 
 	setMenuAccessibility(false);
+
+	const themeToggles = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
+	const darkIcons = document.querySelectorAll<HTMLElement>('[data-theme-icon="dark"]');
+	const lightIcons = document.querySelectorAll<HTMLElement>('[data-theme-icon="light"]');
+	const systemMatcher = window.matchMedia("(prefers-color-scheme: light)");
+
+	const syncThemeUI = () => {
+		const isLight = document.documentElement.classList.contains("light");
+		darkIcons.forEach((el) => el.classList.toggle("hidden", isLight));
+		lightIcons.forEach((el) => el.classList.toggle("hidden", !isLight));
+		themeToggles.forEach((btn) => {
+			btn.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+			btn.setAttribute("aria-pressed", String(isLight));
+		});
+	};
+
+	const applyTheme = (theme: "light" | "dark") => {
+		document.documentElement.classList.toggle("light", theme === "light");
+		syncThemeUI();
+	};
+
+	const onSystemChange = (e: MediaQueryListEvent) => {
+		if (localStorage.getItem("theme")) return; // explicit user choice wins
+		applyTheme(e.matches ? "light" : "dark");
+	};
+
+	themeToggles.forEach((btn) => {
+		btn.addEventListener("click", () => {
+			const next: "light" | "dark" = document.documentElement.classList.contains("light")
+				? "dark"
+				: "light";
+			try {
+				localStorage.setItem("theme", next);
+			} catch {}
+			applyTheme(next);
+		});
+	});
+
+	systemMatcher.addEventListener("change", onSystemChange);
+	syncThemeUI();
 </script>

@@ -1,0 +1,375 @@
+---
+import { hasLiveUrl } from "../utils/projects";
+
+interface NavItem {
+	id: string;
+	label: string;
+}
+
+interface FlatProject {
+	id: string;
+	title: string;
+	category: string;
+	url: string;
+	repo: string;
+}
+
+interface Props {
+	navItems: NavItem[];
+	projects: FlatProject[];
+}
+
+const { navItems, projects } = Astro.props;
+
+type Command = {
+	type: "section" | "project-live" | "project-repo";
+	id: string;
+	label: string;
+	hint: string;
+	target: string;
+};
+
+const commands: Command[] = [
+	...navItems.map<Command>((item) => ({
+		type: "section",
+		id: `section:${item.id}`,
+		label: item.label,
+		hint: "Jump to section",
+		target: item.id,
+	})),
+	...projects.flatMap<Command>((p) => {
+		const entries: Command[] = [];
+		if (hasLiveUrl(p.url)) {
+			entries.push({
+				type: "project-live",
+				id: `project-live:${p.id}`,
+				label: p.title,
+				hint: `${p.category} · Open live site`,
+				target: p.url,
+			});
+		}
+		entries.push({
+			type: "project-repo",
+			id: `project-repo:${p.id}`,
+			label: p.title,
+			hint: `${p.category} · View repo`,
+			target: p.repo,
+		});
+		return entries;
+	}),
+];
+---
+
+<div
+	id="cmdk-overlay"
+	class="fixed inset-0 z-[100] hidden items-start justify-center pt-[15vh] bg-[var(--bg-overlay)] backdrop-blur-sm px-4"
+	aria-hidden="true"
+>
+	<div
+		id="cmdk-panel"
+		role="dialog"
+		aria-modal="true"
+		aria-label="Command palette"
+		class="w-full max-w-xl bg-[var(--bg-surface)] border border-[var(--border-muted)] rounded-xl shadow-2xl shadow-red-500/10 overflow-hidden"
+	>
+		<div
+			class="flex items-center gap-3 px-5 py-4 border-b border-[var(--border-hairline)]"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="w-4 h-4 text-[var(--text-muted)] shrink-0"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<circle cx="11" cy="11" r="7"></circle>
+				<path d="m21 21-4.35-4.35"></path>
+			</svg>
+			<input
+				id="cmdk-input"
+				type="text"
+				placeholder="Jump to section or project..."
+				autocomplete="off"
+				spellcheck="false"
+				class="flex-1 bg-transparent outline-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-faint)]"
+			/>
+			<kbd
+				class="hidden sm:inline-flex font-mono text-[10px] uppercase tracking-wider text-[var(--text-faint)] border border-[var(--border-muted)] rounded px-1.5 py-0.5"
+				>Esc</kbd
+			>
+		</div>
+
+		<ul
+			id="cmdk-list"
+			role="listbox"
+			aria-label="Commands"
+			class="max-h-[50vh] overflow-y-auto py-2"
+		>
+			{
+				commands.map((cmd, i) => (
+					<li
+						role="option"
+						aria-selected={i === 0 ? "true" : "false"}
+						data-cmdk-item
+						data-type={cmd.type}
+						data-target={cmd.target}
+						data-search={`${cmd.label} ${cmd.hint}`.toLowerCase()}
+						class="cmdk-item flex items-center justify-between gap-4 px-5 py-2.5 cursor-pointer transition-colors"
+					>
+						<div class="flex items-center gap-3 min-w-0">
+							<span class="flex w-7 h-7 shrink-0 items-center justify-center rounded-md bg-[var(--fill-tint-5)] border border-[var(--border-hairline)] text-[var(--text-tertiary)]">
+								{cmd.type === "section" ? (
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="w-3.5 h-3.5"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path d="M3 12h18" />
+										<path d="M3 6h18" />
+										<path d="M3 18h18" />
+									</svg>
+								) : cmd.type === "project-live" ? (
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="w-3.5 h-3.5"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path d="M7 7h10v10" />
+										<path d="M7 17 17 7" />
+									</svg>
+								) : (
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="w-3.5 h-3.5"
+										viewBox="0 0 24 24"
+										fill="currentColor"
+									>
+										<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.39-3.88-1.39-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18A11.18 11.18 0 0 1 12 6.82c.99 0 1.99.13 2.93.4 2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.04.78 2.1v3.11c0 .31.21.68.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+									</svg>
+								)}
+							</span>
+							<div class="flex flex-col min-w-0">
+								<span class="text-sm text-[var(--text-primary)] truncate">
+									{cmd.label}
+								</span>
+								<span class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] truncate">
+									{cmd.hint}
+								</span>
+							</div>
+						</div>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="w-3.5 h-3.5 text-[var(--text-faint)] shrink-0 cmdk-enter-icon"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M9 10V6.5l-5 5 5 5V13h9.5A2.5 2.5 0 0 0 21 10.5V4" />
+						</svg>
+					</li>
+				))
+			}
+			<li
+				id="cmdk-empty"
+				class="hidden px-5 py-8 text-center font-mono text-xs uppercase tracking-widest text-[var(--text-faint)]"
+			>
+				No results
+			</li>
+		</ul>
+
+		<div
+			class="flex items-center justify-between px-5 py-3 border-t border-[var(--border-hairline)] font-mono text-[10px] uppercase tracking-widest text-[var(--text-faint)]"
+		>
+			<div class="flex items-center gap-3">
+				<span class="flex items-center gap-1.5">
+					<kbd class="border border-[var(--border-muted)] rounded px-1.5 py-0.5"
+						>↑↓</kbd
+					>
+					Navigate
+				</span>
+				<span class="flex items-center gap-1.5">
+					<kbd class="border border-[var(--border-muted)] rounded px-1.5 py-0.5"
+						>↵</kbd
+					>
+					Select
+				</span>
+			</div>
+			<span class="hidden sm:inline">Command Palette</span>
+		</div>
+	</div>
+</div>
+
+<style>
+	.cmdk-item[aria-selected="true"] {
+		background-color: rgba(239, 68, 68, 0.08);
+		border-left: 2px solid rgb(239 68 68);
+		padding-left: calc(1.25rem - 2px);
+	}
+
+	.cmdk-item[aria-selected="true"] .cmdk-enter-icon {
+		color: rgb(239 68 68);
+	}
+
+	#cmdk-overlay.is-open {
+		display: flex;
+	}
+</style>
+
+<script>
+	const hintButtons = document.querySelectorAll<HTMLElement>("[data-cmdk-trigger]");
+	const overlay = document.getElementById("cmdk-overlay");
+	const panel = document.getElementById("cmdk-panel");
+	const input = document.getElementById(
+		"cmdk-input",
+	) as HTMLInputElement | null;
+	const list = document.getElementById("cmdk-list");
+	const empty = document.getElementById("cmdk-empty");
+
+	if (overlay && panel && input && list) {
+		const items = Array.from(
+			list.querySelectorAll<HTMLElement>("[data-cmdk-item]"),
+		);
+		let visibleItems: HTMLElement[] = [...items];
+		let isOpen = false;
+		let previousOverflow = "";
+
+		const setSelected = (index: number) => {
+			visibleItems.forEach((el, i) => {
+				el.setAttribute("aria-selected", i === index ? "true" : "false");
+				if (i === index) {
+					el.scrollIntoView({ block: "nearest" });
+				}
+			});
+		};
+
+		const open = () => {
+			if (!overlay) return;
+			isOpen = true;
+			previousOverflow = document.body.style.overflow;
+			document.body.style.overflow = "hidden";
+			overlay.classList.add("is-open");
+			overlay.setAttribute("aria-hidden", "false");
+			input.value = "";
+			filter("");
+			setSelected(0);
+			requestAnimationFrame(() => input.focus());
+		};
+
+		const close = () => {
+			if (!overlay) return;
+			isOpen = false;
+			document.body.style.overflow = previousOverflow;
+			overlay.classList.remove("is-open");
+			overlay.setAttribute("aria-hidden", "true");
+			input.blur();
+		};
+
+		const filter = (query: string) => {
+			const q = query.trim().toLowerCase();
+			visibleItems = [];
+			items.forEach((el) => {
+				const haystack = el.getAttribute("data-search") || "";
+				const match = q === "" || haystack.includes(q);
+				el.style.display = match ? "flex" : "none";
+				if (match) visibleItems.push(el);
+			});
+			empty?.classList.toggle("hidden", visibleItems.length > 0);
+			setSelected(visibleItems.length > 0 ? 0 : -1);
+		};
+
+		const run = (el: HTMLElement) => {
+			const type = el.getAttribute("data-type");
+			const target = el.getAttribute("data-target") || "";
+			close();
+
+			if (type === "section") {
+				const section = document.getElementById(`vdf-${target}`);
+				section?.scrollIntoView({ behavior: "smooth" });
+			} else if (type === "project-live" || type === "project-repo") {
+				window.open(target, "_blank", "noopener,noreferrer");
+			}
+		};
+
+		hintButtons.forEach((btn) => btn.addEventListener("click", open));
+
+		overlay.addEventListener("click", (e) => {
+			if (e.target === overlay) close();
+		});
+
+		input.addEventListener("input", () => filter(input.value));
+
+		document.addEventListener("keydown", (e) => {
+			const isMac = navigator.platform.toLowerCase().includes("mac");
+			const cmdKey = isMac ? e.metaKey : e.ctrlKey;
+
+			if (cmdKey && e.key.toLowerCase() === "k") {
+				e.preventDefault();
+				if (isOpen) close();
+				else open();
+				return;
+			}
+
+			if (!isOpen) return;
+
+			if (e.key === "Escape") {
+				e.preventDefault();
+				close();
+				return;
+			}
+
+			if (visibleItems.length === 0) return;
+
+			const currentIndex = visibleItems.findIndex(
+				(el) => el.getAttribute("aria-selected") === "true",
+			);
+
+			if (e.key === "ArrowDown") {
+				e.preventDefault();
+				const next = (currentIndex + 1) % visibleItems.length;
+				setSelected(next);
+			} else if (e.key === "ArrowUp") {
+				e.preventDefault();
+				const prev =
+					(currentIndex - 1 + visibleItems.length) % visibleItems.length;
+				setSelected(prev);
+			} else if (e.key === "Enter") {
+				e.preventDefault();
+				if (currentIndex >= 0) run(visibleItems[currentIndex]);
+			}
+		});
+
+		list.addEventListener("click", (e) => {
+			const target = (e.target as HTMLElement).closest<HTMLElement>(
+				"[data-cmdk-item]",
+			);
+			if (target) run(target);
+		});
+
+		list.addEventListener("mousemove", (e) => {
+			const target = (e.target as HTMLElement).closest<HTMLElement>(
+				"[data-cmdk-item]",
+			);
+			if (target) {
+				const index = visibleItems.indexOf(target);
+				if (index >= 0) setSelected(index);
+			}
+		});
+	}
+</script>

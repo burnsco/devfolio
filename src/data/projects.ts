@@ -23,6 +23,7 @@ export const projectCategories = [
           "Lightweight, experimental media server and player suite inspired by platforms like Plex and Jellyfin, featuring a high-performance Go backend and a modern React frontend.",
         url: "#",
         repo: "https://github.com/burnsco/plum",
+        featured: true,
       },
     ],
   },
@@ -39,6 +40,7 @@ export const projectCategories = [
           "Reddit-style community app focused on creativity and shared interests, without politics, religion, or news-driven content.",
         url: "https://sanctum.coreyburns.ca",
         repo: "https://github.com/burnsco/sanctum",
+        featured: true,
       },
       {
         id: "03",

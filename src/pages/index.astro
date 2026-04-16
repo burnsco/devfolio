@@ -15,11 +15,16 @@ import { skills } from "../data/skills";
 // Components
 import Navigation from "../components/Navigation.astro";
 import Hero from "../components/Hero.astro";
+import TechMarquee from "../components/TechMarquee.astro";
 import Projects from "../components/Projects.astro";
 import Skills from "../components/Skills.astro";
 import About from "../components/About.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import CommandPalette from "../components/CommandPalette.astro";
+import ThemeBootstrap from "../components/ThemeBootstrap.astro";
+
+const flatProjects = projectCategories.flatMap((c) => c.projects);
 
 const NAV_ITEMS = [
 	{ id: "hero", label: "Home" },
@@ -36,6 +41,8 @@ const NAV_ITEMS = [
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Corey Burns — Full-Stack Developer</title>
+
+		<ThemeBootstrap />
 
 		<!-- Primary Meta Tags -->
 		<meta name="title" content="Corey Burns — Full-Stack Developer" />
@@ -97,13 +104,20 @@ const NAV_ITEMS = [
 			"description": "Full-stack developer building technically solid and visually refined software, specializing in Next.js, TanStack, Astro, Tailwind, and TypeScript."
 		})}></script>
 	</head>
-	<body class="min-h-screen overflow-x-hidden text-white bg-[#0a0a0a] selection:bg-red-500/30 font-sans">
+	<body class="min-h-screen overflow-x-hidden selection:bg-red-500/30 font-sans">
 		<div class="noise"></div>
-		
+
+		<div
+			id="scroll-progress"
+			class="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left scale-x-0 bg-red-500 pointer-events-none"
+			aria-hidden="true"
+		></div>
+
 		<Navigation navItems={NAV_ITEMS} activeSection="hero" />
 
 		<main class="relative z-10">
 			<Hero navItems={NAV_ITEMS} />
+			<TechMarquee />
 			<div class="mx-auto max-w-400">
 				<Projects projectCategories={projectCategories} />
 				<Skills skills={skills} />
@@ -113,6 +127,8 @@ const NAV_ITEMS = [
 		</main>
 
 		<Footer />
+
+		<CommandPalette navItems={NAV_ITEMS} projects={flatProjects} />
 
 		<script>
 			import gsap from "gsap";
@@ -195,6 +211,30 @@ const NAV_ITEMS = [
 							scrollIndicator.style.display = "flex";
 						},
 					});
+				}
+
+				const progressBar = document.getElementById("scroll-progress");
+				if (progressBar) {
+					let lastRatio = -1;
+					let scheduled = false;
+					const updateProgress = () => {
+						scheduled = false;
+						const max =
+							document.documentElement.scrollHeight -
+							window.innerHeight;
+						const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+						if (ratio === lastRatio) return;
+						lastRatio = ratio;
+						progressBar.style.transform = `scaleX(${ratio})`;
+					};
+					const schedule = () => {
+						if (scheduled) return;
+						scheduled = true;
+						requestAnimationFrame(updateProgress);
+					};
+					updateProgress();
+					window.addEventListener("scroll", schedule, { passive: true });
+					window.addEventListener("resize", schedule, { passive: true });
 				}
 
 				// Section tracking

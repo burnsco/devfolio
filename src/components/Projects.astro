@@ -1,5 +1,6 @@
 ---
 import { skills as skillGroups } from "../data/skills";
+import { hasLiveUrl } from "../utils/projects";
 import { Icon } from "astro-icon/components";
 
 interface Project {
@@ -11,6 +12,7 @@ interface Project {
 	description: string;
 	url: string;
 	repo: string;
+	featured?: boolean;
 }
 
 interface ProjectCategory {
@@ -48,11 +50,11 @@ if (projectCategories && Array.isArray(projectCategories)) {
     categories = ["All", ...uniqueCategories];
 }
 
+allProjects.sort(
+    (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false),
+);
+
 const totalProjects = allProjects.length;
-const hasLiveUrl = (url: string) => {
-    const value = url.trim();
-    return value.length > 0 && value !== "#";
-};
 
 // Flatten skills for easy lookup
 const skillIcons = skillGroups.flatMap(group => group.items);
@@ -90,7 +92,7 @@ const getSkillIcon = (name: string) => {
 	<div class="flex flex-col xl:flex-row items-start xl:items-end justify-between mb-16 vdf-reveal gap-12">
 		<div class="max-w-2xl">
 			<p class="mb-4 font-mono text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] text-red-500 uppercase font-semibold">
-				Selected Works
+				<span class="text-red-500/60">01 —</span> Selected Works
 			</p>
 			<h2 class="text-5xl font-black tracking-tighter uppercase sm:text-6xl md:text-8xl leading-[0.9]">
 				Projects
@@ -99,11 +101,11 @@ const getSkillIcon = (name: string) => {
 
         <div class="flex flex-col gap-6 w-full xl:w-auto">
             <div class="flex items-center justify-between xl:justify-end gap-4">
-                <p class="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
+                <p class="font-mono text-[11px] tracking-widest text-[var(--text-muted)] uppercase">
                     Filter by Category
                 </p>
-                <div class="h-px w-12 bg-neutral-800 hidden xl:block"></div>
-                <p class="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
+                <div class="h-px w-12 bg-[var(--border-strong)] hidden xl:block"></div>
+                <p class="font-mono text-[11px] tracking-widest text-[var(--text-muted)] uppercase">
                     {String(totalProjects).padStart(2, "0")} Total
                 </p>
             </div>
@@ -111,7 +113,7 @@ const getSkillIcon = (name: string) => {
                 {categories.map((cat) => (
                     <button
                         type="button"
-                        class="filter-btn group relative px-5 py-2.5 rounded-full border border-neutral-800 text-neutral-500 font-mono text-[11px] uppercase tracking-widest transition-all duration-500 hover:border-red-500/40 hover:text-white"
+                        class="filter-btn group relative px-5 py-2.5 rounded-full border border-[var(--border-strong)] text-[var(--text-muted)] font-mono text-[11px] uppercase tracking-widest transition-all duration-500 hover:border-red-500/40 hover:text-[var(--text-primary)]"
                         data-category={cat}
                         aria-pressed={cat === "All" ? "true" : "false"}
                     >
@@ -127,8 +129,12 @@ const getSkillIcon = (name: string) => {
 	<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 project-grid items-start">
 		{allProjects.map((project) => (
 			<div
-				class="project-card group relative flex flex-col bg-[#0d0d0d]/50 border border-white/5 rounded-3xl p-8 hover:bg-[#121212] transition-all duration-700 ease-out vdf-reveal overflow-hidden h-full"
+				class:list={[
+					"project-card group relative flex flex-col bg-[var(--bg-card)] border border-[var(--border-hairline)] rounded-3xl p-8 hover:bg-[var(--bg-card-hover)] transition-all duration-700 ease-out vdf-reveal overflow-hidden h-full",
+					project.featured && "md:col-span-2 xl:col-span-2 featured-card",
+				]}
 				data-category={project.parentCategory}
+				data-featured={project.featured ? "true" : "false"}
 				style={`--project-color: ${project.color}`}
 			>
                 {/* Background Glow */}
@@ -136,8 +142,16 @@ const getSkillIcon = (name: string) => {
                 
                 <div class="flex items-start justify-between mb-8">
                     <div class="flex flex-col">
-                        <span class="font-mono text-sm font-bold text-red-500 mb-1">{project.id}</span>
-                        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-600 font-bold group-hover:text-neutral-400 transition-colors group-[.is-active]:text-neutral-400">
+                        <div class="flex items-center gap-3 mb-1">
+                            <span class="font-mono text-sm font-bold text-red-500">{project.id}</span>
+                            {project.featured && (
+                                <span class="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-red-500/30 bg-red-500/5 font-mono text-[9px] uppercase tracking-[0.2em] text-red-400 font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                                    Featured
+                                </span>
+                            )}
+                        </div>
+                        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--text-faint)] font-bold group-hover:text-[var(--text-tertiary)] transition-colors group-[.is-active]:text-[var(--text-tertiary)]">
                             {project.category}
                         </span>
                     </div>
@@ -147,13 +161,13 @@ const getSkillIcon = (name: string) => {
                             href={project.repo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="p-2.5 rounded-full bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group/repo"
+                            class="p-2.5 rounded-full bg-[var(--fill-tint-5)] border border-[var(--border-hairline)] hover:border-[var(--border-strong)] hover:bg-[var(--fill-tint-10)] transition-all duration-300 group/repo"
                             title="View Repository"
                         >
                             <img
                                 src="/icons/github.svg"
                                 alt="GitHub"
-                                class="w-4 h-4 opacity-50 group-hover/repo:opacity-100 invert transition-opacity"
+                                class="w-4 h-4 opacity-50 group-hover/repo:opacity-100 icon-adaptive transition-opacity"
                             />
                         </a>
                         {hasLiveUrl(project.url) && (
@@ -161,7 +175,7 @@ const getSkillIcon = (name: string) => {
                                 href={project.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="p-2.5 rounded-full bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group/link"
+                                class="p-2.5 rounded-full bg-[var(--fill-tint-5)] border border-[var(--border-hairline)] hover:border-[var(--border-strong)] hover:bg-[var(--fill-tint-10)] transition-all duration-300 group/link"
                                 title="Visit Website"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50 group-hover/link:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -190,14 +204,14 @@ const getSkillIcon = (name: string) => {
                             <h3 class="text-3xl md:text-4xl font-black tracking-tighter uppercase transition-all duration-500 leading-none project-title">
                                 {project.title}
                             </h3>
-                            <p class="mt-2 text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                            <p class="mt-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--text-muted)]">
                                 Repository available
                             </p>
                         </div>
                     )}
                 </div>
 
-                <p class="text-neutral-400 text-sm leading-relaxed mb-10 grow font-medium">
+                <p class="text-[var(--text-tertiary)] text-sm leading-relaxed mb-10 grow font-medium">
                     {project.description}
                 </p>
 
@@ -206,7 +220,7 @@ const getSkillIcon = (name: string) => {
                         {project.tech.split(" · ").map((t) => {
                             const icon = getSkillIcon(t);
                             return (
-                                <span class="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-mono tracking-widest uppercase border border-white/5 bg-white/[0.02] rounded-full text-neutral-500 group-hover:border-white/10 group-hover:text-neutral-300 group-[.is-active]:border-white/10 group-[.is-active]:text-neutral-300 transition-all duration-500">
+                                <span class="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-mono tracking-widest uppercase border border-[var(--border-hairline)] bg-[var(--fill-tint-2)] rounded-full text-[var(--text-muted)] group-hover:border-[var(--border-muted)] group-hover:text-[var(--text-secondary)] group-[.is-active]:border-[var(--border-muted)] group-[.is-active]:text-[var(--text-secondary)] transition-all duration-500">
                                     {icon && (
                                         <Icon 
                                             name={icon} 
@@ -221,7 +235,7 @@ const getSkillIcon = (name: string) => {
                 </div>
 
                 {/* Corner Decoration */}
-                <div class="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-br from-transparent to-white/[0.03] rounded-tl-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-br from-transparent to-[var(--fill-tint-5)] rounded-tl-3xl"></div>
 			</div>
 		))}
 	</div>
@@ -278,13 +292,11 @@ const getSkillIcon = (name: string) => {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const category = btn.getAttribute('data-category');
-            
+
             filterBtns.forEach(b => {
                 b.setAttribute('aria-pressed', 'false');
-                b.querySelector('span')?.classList.remove('text-white');
             });
             btn.setAttribute('aria-pressed', 'true');
-            btn.querySelector('span')?.classList.add('text-white');
 
             projectCards.forEach(card => {
                 const cardCat = card.getAttribute('data-category');
@@ -332,8 +344,6 @@ const getSkillIcon = (name: string) => {
     setupMobileObserver();
     window.addEventListener("resize", setupMobileObserver, { passive: true });
 
-    // Initialize the "All" button style
-    document.querySelector('.filter-btn[data-category="All"] span')?.classList.add('text-white');
 </script>
 
 <style>
@@ -343,7 +353,7 @@ const getSkillIcon = (name: string) => {
     }
     
     .filter-btn[aria-pressed="true"] {
-        color: white;
+        color: var(--text-primary);
     }
 
     .project-grid {
@@ -351,9 +361,39 @@ const getSkillIcon = (name: string) => {
     }
 
     .project-title {
-        color: white;
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+        color: var(--text-primary);
+        -webkit-text-stroke: 1px var(--outline-stroke-faint);
         transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .featured-card .project-title {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        line-height: 0.9;
+    }
+
+    .featured-card p.grow,
+    .featured-card .grow {
+        font-size: 0.95rem;
+        max-width: 60ch;
+    }
+
+    .featured-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, var(--project-color) 0%, transparent 40%, transparent 60%, var(--project-color) 100%);
+        opacity: 0.25;
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
+
+    .featured-card:hover::before {
+        opacity: 0.5;
     }
 
     /* Hover State (Desktop) */
