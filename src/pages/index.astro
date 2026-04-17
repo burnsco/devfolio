@@ -135,66 +135,82 @@ const NAV_ITEMS = [
 			import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 			gsap.registerPlugin(ScrollTrigger);
+			gsap.config({ force3D: true });
 			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-			// Initialize animations
+			const markRevealed = (el: HTMLElement) => {
+				el.classList.add("is-revealed");
+				el.style.willChange = "auto";
+			};
+
 			const init = () => {
 				if (!prefersReducedMotion.matches) {
-					// Reveal animations
+					// Reveal animations — play once so scroll-up doesn't replay and feel jittery.
 					gsap.utils.toArray<HTMLElement>(".vdf-reveal").forEach((el) => {
 						gsap.fromTo(
 							el,
-							{ opacity: 0, y: 50 },
+							{ opacity: 0, y: 28 },
 							{
 								opacity: 1,
 								y: 0,
-								duration: 1.2,
-								ease: "power4.out",
+								duration: 0.8,
+								ease: "power3.out",
+								force3D: true,
 								scrollTrigger: {
 									trigger: el,
-									start: "top 90%",
-									toggleActions: "play none none reverse",
+									start: "top 88%",
+									once: true,
 								},
+								onStart: () => el.classList.add("is-revealed"),
+								onComplete: () => markRevealed(el),
 							}
 						);
 					});
 
-					// Stagger animations
 					gsap.utils.toArray<HTMLElement>(".vdf-stagger").forEach((el) => {
 						gsap.fromTo(
 							el,
-							{ opacity: 0, x: -20 },
+							{ opacity: 0, x: -14 },
 							{
 								opacity: 1,
 								x: 0,
-								duration: 0.8,
-								ease: "power3.out",
+								duration: 0.6,
+								ease: "power2.out",
+								force3D: true,
 								scrollTrigger: {
 									trigger: el,
-									start: "top 95%",
-									toggleActions: "play none none reverse",
+									start: "top 92%",
+									once: true,
 								},
+								onStart: () => el.classList.add("is-revealed"),
+								onComplete: () => markRevealed(el),
 							}
 						);
 					});
+				} else {
+					document
+						.querySelectorAll<HTMLElement>(".vdf-reveal, .vdf-stagger, [data-hero-item]")
+						.forEach((el) => markRevealed(el));
 				}
 
-				// Hero entrance animation (on-load, not scroll-triggered)
 				const heroItems = gsap.utils.toArray("[data-hero-item]") as HTMLElement[];
-				if (heroItems.length) {
-					gsap.set(heroItems, { opacity: 0, y: 40 });
+				if (heroItems.length && !prefersReducedMotion.matches) {
+					gsap.set(heroItems, { opacity: 0, y: 24 });
 					gsap.to(heroItems, {
 						opacity: 1,
 						y: 0,
-						duration: 1,
-						ease: "power4.out",
-						stagger: 0.15,
-						delay: 0.2,
-						clearProps: "transform",
+						duration: 0.9,
+						ease: "power3.out",
+						stagger: 0.1,
+						delay: 0.15,
+						force3D: true,
+						clearProps: "transform,willChange",
+						onStart: () => heroItems.forEach((el) => el.classList.add("is-revealed")),
 					});
+				} else {
+					heroItems.forEach((el) => markRevealed(el));
 				}
 
-				// Scroll indicator fade-out
 				const scrollIndicator = document.getElementById("hero-scroll-indicator");
 				if (scrollIndicator) {
 					ScrollTrigger.create({
@@ -237,7 +253,6 @@ const NAV_ITEMS = [
 					window.addEventListener("resize", schedule, { passive: true });
 				}
 
-				// Section tracking
 				const navItems = ["hero", "projects", "skills", "about", "contact"];
 				navItems.forEach((id) => {
 					ScrollTrigger.create({

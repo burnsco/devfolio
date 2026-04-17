@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  -webkit-text-size-adjust: 100%;
+}
+
 :root {
   color-scheme: dark;
   font-family: "Space Grotesk", system-ui, sans-serif;
@@ -39,6 +45,9 @@
   --icon-invert: 1;
   --outline-stroke: rgb(255 255 255 / 0.3);
   --outline-stroke-faint: rgb(255 255 255 / 0.15);
+
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --card-shadow-hover: 0 1px 2px rgb(0 0 0 / 0.5), 0 20px 48px -16px rgb(0 0 0 / 0.75);
 }
 
 :root.light {
@@ -77,6 +86,9 @@
   --icon-invert: 0;
   --outline-stroke: rgb(10 10 10 / 0.35);
   --outline-stroke-faint: rgb(10 10 10 / 0.2);
+
+  --card-shadow: 0 1px 2px rgb(10 10 10 / 0.04), 0 6px 20px -10px rgb(10 10 10 / 0.08);
+  --card-shadow-hover: 0 2px 4px rgb(10 10 10 / 0.06), 0 18px 44px -14px rgb(10 10 10 / 0.14);
 }
 
 body {
@@ -84,10 +96,49 @@ body {
   min-height: 100vh;
   background-color: var(--bg-base);
   color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Pre-hide reveal elements so JS animation starts from a clean state (no FOUC / pop-in). */
+.vdf-reveal,
+.vdf-stagger,
+[data-hero-item] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.vdf-reveal.is-revealed,
+.vdf-stagger.is-revealed,
+[data-hero-item].is-revealed {
+  opacity: 1;
+}
+
+/* Smooth scroll-progress bar */
+#scroll-progress {
+  transition: transform 0.12s linear;
+  will-change: transform;
+}
+
+/* Card surface (applied via .surface-card to refine both themes) */
+.surface-card {
+  box-shadow: var(--card-shadow);
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.surface-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
 }
 
 .noise {
@@ -139,6 +190,13 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .vdf-reveal,
+  .vdf-stagger,
+  [data-hero-item] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *,
