@@ -102,7 +102,7 @@ export const projectCategories = [
         title: "hackernews",
         category: "News Client",
         color: "#fb923c",
-        tech: "Next.js 16 · React 19 · Framer Motion · HN Firebase API",
+        tech: "Vite 8 · React 19 · Framer Motion · HN Firebase API",
         description:
           "A cleaner, more visual Hacker News reader that fetches live stories and comments from the official API.",
         url: "https://hackernews.coreyburns.ca",
@@ -173,7 +173,7 @@ export const projectCategories = [
         title: "games-hub",
         category: "Arcade Platform",
         color: "#ef4444",
-        tech: "Next.js 16 · React 19 · TypeScript · Tailwind CSS",
+        tech: "Vite 8 · React 19 · TypeScript · Tailwind CSS",
         description:
           "Browser arcade featuring 13 instant-play games including Snake, Pong, Flappy Jump, and 2048, with a single polished hub UI.",
         url: "https://games.coreyburns.ca",
@@ -271,7 +271,7 @@ export const projectCategories = [
         title: "image-mage",
         category: "Media Tooling",
         color: "#f59e0b",
-        tech: "Next.js 16 · Sharp · TypeScript · Tailwind CSS",
+        tech: "Vite 8 · React 19 · Sharp · TypeScript",
         description:
           "Image conversion and compression tool with batch uploads, quality presets, target-size tuning, and ZIP export workflows.",
         url: "https://image-mage.coreyburns.ca",
@@ -293,9 +293,9 @@ export const projectCategories = [
         title: "koda",
         category: "Social & Streaming",
         color: "#8b5cf6",
-        tech: "Zig · Next.js 16 · React 19 · WebSockets · WebRTC · Docker",
+        tech: "Zig · Vite 8 · React 19 · WebSockets · WebRTC · Docker",
         description:
-          "Full-stack Twitch/Discord-style app with a high-performance Zig backend and Next.js frontend, supporting real-time chat and HLS streaming. [Under Construction]",
+          "Full-stack Twitch/Discord-style app with a high-performance Zig backend and Vite-powered React frontend, supporting real-time chat and HLS streaming. [Under Construction]",
         url: "https://koda.coreyburns.ca",
         repo: "https://github.com/burnsco/koda",
       },
