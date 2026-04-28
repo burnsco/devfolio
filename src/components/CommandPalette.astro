@@ -199,13 +199,15 @@ const commands: Command[] = [
 		>
 			<div class="flex items-center gap-3">
 				<span class="flex items-center gap-1.5">
-					<kbd class="border border-[var(--border-muted)] rounded px-1.5 py-0.5"
+					<kbd
+						class="border border-[var(--border-muted)] rounded px-1.5 py-0.5"
 						>↑↓</kbd
 					>
 					Navigate
 				</span>
 				<span class="flex items-center gap-1.5">
-					<kbd class="border border-[var(--border-muted)] rounded px-1.5 py-0.5"
+					<kbd
+						class="border border-[var(--border-muted)] rounded px-1.5 py-0.5"
 						>↵</kbd
 					>
 					Select
@@ -233,7 +235,9 @@ const commands: Command[] = [
 </style>
 
 <script>
-	const hintButtons = document.querySelectorAll<HTMLElement>("[data-cmdk-trigger]");
+	const hintButtons = document.querySelectorAll<HTMLElement>(
+		"[data-cmdk-trigger]",
+	);
 	const overlay = document.getElementById("cmdk-overlay");
 	const panel = document.getElementById("cmdk-panel");
 	const input = document.getElementById(
@@ -252,7 +256,10 @@ const commands: Command[] = [
 
 		const setSelected = (index: number) => {
 			visibleItems.forEach((el, i) => {
-				el.setAttribute("aria-selected", i === index ? "true" : "false");
+				el.setAttribute(
+					"aria-selected",
+					i === index ? "true" : "false",
+				);
 				if (i === index) {
 					el.scrollIntoView({ block: "nearest" });
 				}
@@ -347,7 +354,8 @@ const commands: Command[] = [
 			} else if (e.key === "ArrowUp") {
 				e.preventDefault();
 				const prev =
-					(currentIndex - 1 + visibleItems.length) % visibleItems.length;
+					(currentIndex - 1 + visibleItems.length) %
+					visibleItems.length;
 				setSelected(prev);
 			} else if (e.key === "Enter") {
 				e.preventDefault();

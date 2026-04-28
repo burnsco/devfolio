@@ -94,24 +94,32 @@ const NAV_ITEMS = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<!-- JSON-LD Structured Data -->
-			<script is:inline type="application/ld+json" set:html={JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "Person",
-			"name": "Corey Burns",
-			"url": "https://coreyburns.ca",
-			"jobTitle": "Full-Stack Developer",
-			"sameAs": ["https://github.com/burnsco"],
-			"description": "Full-stack developer building technically solid and visually refined software, specializing in Next.js, TanStack, Astro, Tailwind, and TypeScript."
-		})}></script>
+		<script
+			is:inline
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Person",
+				name: "Corey Burns",
+				url: "https://coreyburns.ca",
+				jobTitle: "Full-Stack Developer",
+				sameAs: ["https://github.com/burnsco"],
+				description:
+					"Full-stack developer building technically solid and visually refined software, specializing in Next.js, TanStack, Astro, Tailwind, and TypeScript.",
+			})}
+		/>
 	</head>
-	<body class="min-h-screen overflow-x-hidden selection:bg-red-500/30 font-sans">
+	<body
+		class="min-h-screen overflow-x-hidden selection:bg-red-500/30 font-sans"
+	>
 		<div class="noise"></div>
 
 		<div
 			id="scroll-progress"
 			class="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left scale-x-0 bg-red-500 pointer-events-none"
 			aria-hidden="true"
-		></div>
+		>
+		</div>
 
 		<Navigation navItems={NAV_ITEMS} activeSection="hero" />
 
@@ -136,7 +144,9 @@ const NAV_ITEMS = [
 
 			gsap.registerPlugin(ScrollTrigger);
 			gsap.config({ force3D: true });
-			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+			const prefersReducedMotion = window.matchMedia(
+				"(prefers-reduced-motion: reduce)",
+			);
 
 			const markRevealed = (el: HTMLElement) => {
 				el.classList.add("is-revealed");
@@ -146,54 +156,64 @@ const NAV_ITEMS = [
 			const init = () => {
 				if (!prefersReducedMotion.matches) {
 					// Reveal animations — play once so scroll-up doesn't replay and feel jittery.
-					gsap.utils.toArray<HTMLElement>(".vdf-reveal").forEach((el) => {
-						gsap.fromTo(
-							el,
-							{ opacity: 0, y: 28 },
-							{
-								opacity: 1,
-								y: 0,
-								duration: 0.8,
-								ease: "power3.out",
-								force3D: true,
-								scrollTrigger: {
-									trigger: el,
-									start: "top 88%",
-									once: true,
+					gsap.utils
+						.toArray<HTMLElement>(".vdf-reveal")
+						.forEach((el) => {
+							gsap.fromTo(
+								el,
+								{ opacity: 0, y: 28 },
+								{
+									opacity: 1,
+									y: 0,
+									duration: 0.8,
+									ease: "power3.out",
+									force3D: true,
+									scrollTrigger: {
+										trigger: el,
+										start: "top 88%",
+										once: true,
+									},
+									onStart: () =>
+										el.classList.add("is-revealed"),
+									onComplete: () => markRevealed(el),
 								},
-								onStart: () => el.classList.add("is-revealed"),
-								onComplete: () => markRevealed(el),
-							}
-						);
-					});
+							);
+						});
 
-					gsap.utils.toArray<HTMLElement>(".vdf-stagger").forEach((el) => {
-						gsap.fromTo(
-							el,
-							{ opacity: 0, x: -14 },
-							{
-								opacity: 1,
-								x: 0,
-								duration: 0.6,
-								ease: "power2.out",
-								force3D: true,
-								scrollTrigger: {
-									trigger: el,
-									start: "top 92%",
-									once: true,
+					gsap.utils
+						.toArray<HTMLElement>(".vdf-stagger")
+						.forEach((el) => {
+							gsap.fromTo(
+								el,
+								{ opacity: 0, x: -14 },
+								{
+									opacity: 1,
+									x: 0,
+									duration: 0.6,
+									ease: "power2.out",
+									force3D: true,
+									scrollTrigger: {
+										trigger: el,
+										start: "top 92%",
+										once: true,
+									},
+									onStart: () =>
+										el.classList.add("is-revealed"),
+									onComplete: () => markRevealed(el),
 								},
-								onStart: () => el.classList.add("is-revealed"),
-								onComplete: () => markRevealed(el),
-							}
-						);
-					});
+							);
+						});
 				} else {
 					document
-						.querySelectorAll<HTMLElement>(".vdf-reveal, .vdf-stagger, [data-hero-item]")
+						.querySelectorAll<HTMLElement>(
+							".vdf-reveal, .vdf-stagger, [data-hero-item]",
+						)
 						.forEach((el) => markRevealed(el));
 				}
 
-				const heroItems = gsap.utils.toArray("[data-hero-item]") as HTMLElement[];
+				const heroItems = gsap.utils.toArray(
+					"[data-hero-item]",
+				) as HTMLElement[];
 				if (heroItems.length && !prefersReducedMotion.matches) {
 					gsap.set(heroItems, { opacity: 0, y: 24 });
 					gsap.to(heroItems, {
@@ -205,20 +225,27 @@ const NAV_ITEMS = [
 						delay: 0.15,
 						force3D: true,
 						clearProps: "transform,willChange",
-						onStart: () => heroItems.forEach((el) => el.classList.add("is-revealed")),
+						onStart: () =>
+							heroItems.forEach((el) =>
+								el.classList.add("is-revealed"),
+							),
 					});
 				} else {
 					heroItems.forEach((el) => markRevealed(el));
 				}
 
-				const scrollIndicator = document.getElementById("hero-scroll-indicator");
+				const scrollIndicator = document.getElementById(
+					"hero-scroll-indicator",
+				);
 				if (scrollIndicator) {
 					ScrollTrigger.create({
 						trigger: "#vdf-hero",
 						start: "top top",
 						end: "20% top",
 						onUpdate: (self) => {
-							scrollIndicator.style.opacity = String(Math.max(0, 1 - self.progress * 3));
+							scrollIndicator.style.opacity = String(
+								Math.max(0, 1 - self.progress * 3),
+							);
 						},
 						onLeave: () => {
 							scrollIndicator.style.display = "none";
@@ -238,7 +265,8 @@ const NAV_ITEMS = [
 						const max =
 							document.documentElement.scrollHeight -
 							window.innerHeight;
-						const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+						const ratio =
+							max > 0 ? Math.min(window.scrollY / max, 1) : 0;
 						if (ratio === lastRatio) return;
 						lastRatio = ratio;
 						progressBar.style.transform = `scaleX(${ratio})`;
@@ -249,11 +277,21 @@ const NAV_ITEMS = [
 						requestAnimationFrame(updateProgress);
 					};
 					updateProgress();
-					window.addEventListener("scroll", schedule, { passive: true });
-					window.addEventListener("resize", schedule, { passive: true });
+					window.addEventListener("scroll", schedule, {
+						passive: true,
+					});
+					window.addEventListener("resize", schedule, {
+						passive: true,
+					});
 				}
 
-				const navItems = ["hero", "projects", "skills", "about", "contact"];
+				const navItems = [
+					"hero",
+					"projects",
+					"skills",
+					"about",
+					"contact",
+				];
 				navItems.forEach((id) => {
 					ScrollTrigger.create({
 						trigger: `#vdf-${id}`,
